@@ -32,6 +32,27 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw]
+
+gem 'coffee-script-source', '1.8.0'
+
+gem 'bootstrap-sass'
+gem 'autoprefixer-rails'
+gem 'bootstrap-generators'
+gem 'rails_layout'
+gem 'compass-rails'
+gem 'inifile'
+gem 'honoka-rails'
+gem 'simple_form'
+
+source 'http://rails-assets.org' do
+  gem 'rails-assets-bootstrap-fileinput', '~> 2.5.0'
+end
+
+group :development, :test do
+  gem 'rspec-rails', '~> 3.0.0'
+end
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'

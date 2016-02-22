@@ -1,0 +1,33 @@
+<div class="page-header">
+  <%= link_to new_emm_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    アップロード
+  <% end %>
+  <h1>EMM情報</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+            <th>動画名</th>
+            <th>保存ファイル名</th>
+            <th>ユーザー</th>
+            <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @emms) do |emm| %>
+            <td><%= link_to emm.original_name, emm %></td>
+            <td><%= emm.save_file_name %></td>
+            <td><%= emm.user %></td>
+            <td><%= link_to 'Show', emm %></td>
+        <td><%= link_to 'Edit', edit_emm_path(emm) %></td>
+        <td><%= link_to 'Destroy', emm, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>

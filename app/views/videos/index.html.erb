@@ -1,0 +1,29 @@
+<div class="page-header">
+  <%= link_to new_video_path, class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-plus"></span>
+    アップロード
+  <% end %>
+  <h1>動画情報</h1>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered table-hover">
+    <thead>
+      <tr>
+        <th>動画名</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <%= content_tag_for(:tr, @videos) do |video| %>
+        <td><%= video.name %></td>
+        <td><%= link_to 'Show', video %></td>
+        <td><%= link_to 'Edit', edit_video_path(video) %></td>
+        <td><%= link_to 'Destroy', video, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </tbody>
+  </table>
+</div>

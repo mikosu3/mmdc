@@ -1,0 +1,2 @@
+module WantedsHelper
+end

@@ -1,0 +1,26 @@
+<div class="page-header">
+  <%= link_to emms_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
+  <% end %>
+  <%= link_to edit_emm_path(@emm), class: 'btn btn-primary' do %>
+    <span class="glyphicon glyphicon-pencil"></span>
+    Edit
+  <% end %>
+  <h1>Show emm</h1>
+</div>
+
+<dl class="dl-horizontal">
+  <dt>Original name:</dt>
+  <dd><%= @emm.original_name %></dd>
+
+  <dt>Save file name:</dt>
+  <dd><%= @emm.save_file_name %></dd>
+
+  <dt>Lock version:</dt>
+  <dd><%= @emm.lock_version %></dd>
+
+  <dt>User:</dt>
+  <dd><%= @emm.user %></dd>
+
+</dl>

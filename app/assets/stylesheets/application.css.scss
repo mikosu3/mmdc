@@ -13,3 +13,7 @@
  *= require_tree .
  *= require_self
  */
+$navbar-height: 50px;
+@import "bootstrap-sprockets";
+@import "honoka";
+@import 'bootstrap-fileinput';
