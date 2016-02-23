@@ -203,4 +203,8 @@ ja:
 
   attributes:
     video_name: 動画名
-    name: 動画名
+    name: 名前
+    url: URL
+    email: メールアドレス
+    nico: ニコニコ
+    update_by: 最終更新者

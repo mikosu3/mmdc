@@ -11,10 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160221164644) do
+ActiveRecord::Schema.define(version: 20160223130701) do
 
   create_table "authors", force: :cascade do |t|
-    t.integer  "credit_id",    limit: 4
     t.string   "name",         limit: 100, null: false
     t.string   "url",          limit: 255
     t.string   "twitter",      limit: 255
@@ -23,9 +22,10 @@ ActiveRecord::Schema.define(version: 20160221164644) do
     t.integer  "lock_version", limit: 4
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.string   "update_by",    limit: 255
+    t.string   "nico",         limit: 255
   end
 
-  add_index "authors", ["credit_id"], name: "index_authors_on_credit_id", using: :btree
   add_index "authors", ["name"], name: "index_authors_on_name", using: :btree
 
   create_table "credit_logs", force: :cascade do |t|
@@ -46,8 +46,12 @@ ActiveRecord::Schema.define(version: 20160221164644) do
     t.integer  "wanted_id",    limit: 4,   null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
+    t.integer  "author_id",    limit: 4
+    t.string   "name",         limit: 255
+    t.string   "url",          limit: 255
   end
 
+  add_index "credits", ["author_id"], name: "index_credits_on_author_id", using: :btree
   add_index "credits", ["wanted_id"], name: "index_credits_on_wanted_id", using: :btree
 
   create_table "emms", force: :cascade do |t|
@@ -115,10 +119,10 @@ ActiveRecord::Schema.define(version: 20160221164644) do
 
   add_index "wanteds", ["file_name", "folder_name", "extension"], name: "index_wanteds_on_file_name_and_folder_name_and_extension", unique: true, using: :btree
 
-  add_foreign_key "authors", "credits"
   add_foreign_key "credit_logs", "authors"
   add_foreign_key "credit_logs", "credits"
   add_foreign_key "credit_logs", "users"
+  add_foreign_key "credits", "authors"
   add_foreign_key "credits", "wanteds"
   add_foreign_key "mmd_objects", "emms"
   add_foreign_key "videos", "users"

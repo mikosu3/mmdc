@@ -1,9 +1,18 @@
 Rails.application.routes.draw do
-  resources :authors
-  resources :wanteds
-  resources :emms
-  resources :videos
-  resources :infos
+  resources :authors, :except => [:show, :delete]
+  resources :wanteds, :except => [:show, :delete]
+  resources :emms, :except => [:show, :delete]
+  resources :videos, :except => [:show]
+  resources :infos, :only => [:index]
+  resources :credits, :except => [:show, :delete] do
+    collection do
+      get "/new/:wanted_id" => "credits#new", as: "add"
+    end
+  end
+#  resources :credits do
+#    get "/new/:wanted_id" => "credits#new", as: "add"
+#  end
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

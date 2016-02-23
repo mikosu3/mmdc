@@ -1,34 +1,22 @@
 <div class="page-header">
-  <%= link_to new_wanted_path, class: 'btn btn-primary' do %>
-    <span class="glyphicon glyphicon-plus"></span>
-    New Wanted
-  <% end %>
-  <h1>Listing wanteds</h1>
+  <h1>Wanted! <small>情報提供を求めるモデル情報です</small></h1>
 </div>
 
 <div class="table-responsive">
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
-            <th>File name</th>
-            <th>Folder name</th>
-            <th>Extension</th>
-            <th>Lock version</th>
-            <th></th>
-        <th></th>
-        <th></th>
+            <th>フォルダ名</th>
+            <th>ファイル名</th>
+            <th>拡張子</th>
       </tr>
     </thead>
 
     <tbody>
       <%= content_tag_for(:tr, @wanteds) do |wanted| %>
-            <td><%= wanted.file_name %></td>
             <td><%= wanted.folder_name %></td>
+            <td><%= link_to wanted.file_name, "credits/new/" + wanted.id.to_s %></td>
             <td><%= wanted.extension %></td>
-            <td><%= wanted.lock_version %></td>
-            <td><%= link_to 'Show', wanted %></td>
-        <td><%= link_to 'Edit', edit_wanted_path(wanted) %></td>
-        <td><%= link_to 'Destroy', wanted, method: :delete, data: { confirm: 'Are you sure?' } %></td>
       <% end %>
     </tbody>
   </table>

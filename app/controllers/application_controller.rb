@@ -4,7 +4,12 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   #ログインしているユーザーID
-  def getUserId
-    return 1
+  def get_user_id
+    return 3
+  end
+
+  #ログインしているユーザーのツイッター名
+  def get_screen_name
+    return "mikosu3"
   end
 end

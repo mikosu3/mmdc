@@ -7,11 +7,6 @@ class AuthorsController < ApplicationController
     @authors = Author.all
   end
 
-  # GET /authors/1
-  # GET /authors/1.json
-  def show
-  end
-
   # GET /authors/new
   def new
     @author = Author.new
@@ -27,9 +22,12 @@ class AuthorsController < ApplicationController
     @author = Author.new(author_params)
 
     respond_to do |format|
+
+      @author.update_by = get_screen_name
+
       if @author.save
-        format.html { redirect_to @author, notice: 'Author was successfully created.' }
-        format.json { render :show, status: :created, location: @author }
+        format.html { redirect_to authors_url, notice: '作者情報を登録しました。' }
+        format.json { render :index, status: :created, location: @author }
       else
         format.html { render :new }
         format.json { render json: @author.errors, status: :unprocessable_entity }
@@ -41,23 +39,16 @@ class AuthorsController < ApplicationController
   # PATCH/PUT /authors/1.json
   def update
     respond_to do |format|
+
+      @author.update_by = get_screen_name
+
       if @author.update(author_params)
-        format.html { redirect_to @author, notice: 'Author was successfully updated.' }
+        format.html { redirect_to authors_url, notice: '作者情報を更新しました。' }
         format.json { render :show, status: :ok, location: @author }
       else
         format.html { render :edit }
         format.json { render json: @author.errors, status: :unprocessable_entity }
       end
-    end
-  end
-
-  # DELETE /authors/1
-  # DELETE /authors/1.json
-  def destroy
-    @author.destroy
-    respond_to do |format|
-      format.html { redirect_to authors_url, notice: 'Author was successfully destroyed.' }
-      format.json { head :no_content }
     end
   end
 
@@ -69,6 +60,6 @@ class AuthorsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def author_params
-      params.require(:author).permit(:credit_id, :name, :url, :twitter, :pixiv, :email, :lock_version)
+      params.require(:author).permit(:credit_id, :name, :url, :twitter, :pixiv, :email, :lock_version, :nico)
     end
 end

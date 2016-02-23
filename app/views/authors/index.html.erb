@@ -1,40 +1,32 @@
 <div class="page-header">
   <%= link_to new_author_path, class: 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-plus"></span>
-    New Author
+    新規登録
   <% end %>
-  <h1>Listing authors</h1>
+  <h1>作者情報</h1>
 </div>
 
 <div class="table-responsive">
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
-            <th>Credit</th>
-            <th>Name</th>
-            <th>Url</th>
+            <th>作者名</th>
+            <th>Web</th>
+            <th>ニコニコ</th>
             <th>Twitter</th>
             <th>Pixiv</th>
             <th>Email</th>
-            <th>Lock version</th>
-            <th></th>
-        <th></th>
-        <th></th>
       </tr>
     </thead>
 
     <tbody>
       <%= content_tag_for(:tr, @authors) do |author| %>
-            <td><%= author.credit %></td>
-            <td><%= author.name %></td>
-            <td><%= author.url %></td>
+            <td><%= link_to author.name, edit_author_path(author) %></td>
+            <td><%= unless author.url.empty?  then link_to '外部サイト', author.url , :target => "_blank" end %></td>
+            <td><%= author.nico %></td>
             <td><%= author.twitter %></td>
             <td><%= author.pixiv %></td>
-            <td><%= author.email %></td>
-            <td><%= author.lock_version %></td>
-            <td><%= link_to 'Show', author %></td>
-        <td><%= link_to 'Edit', edit_author_path(author) %></td>
-        <td><%= link_to 'Destroy', author, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= mail_to(author.email) %></td>
       <% end %>
     </tbody>
   </table>

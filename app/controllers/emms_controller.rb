@@ -29,7 +29,7 @@ class EmmsController < ApplicationController
     upload_file = params[:file]
 
     respond_to do |format|
-      if EmmRegistService.save(upload_file, emm_params, getUserId)
+      if EmmRegistService.save(upload_file, emm_params, get_user_id)
         format.html { redirect_to emms_url, notice: 'Emm情報を登録しました。' }
         format.json { render :show, status: :created, location: @emm }
       else

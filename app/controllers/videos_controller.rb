@@ -4,7 +4,7 @@ class VideosController < ApplicationController
   # GET /videos
   # GET /videos.json
   def index
-    @videos = Video.all
+    @videos = Video.where(user_id: get_user_id)
   end
 
   # GET /videos/1
@@ -27,7 +27,7 @@ class VideosController < ApplicationController
 
     #動画基本情報
     @video = Video.new(video_params)
-    @video.user_id = getUserId
+    @video.user_id = get_user_id
 
     upload_file = params[:file]
 

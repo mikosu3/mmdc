@@ -1,7 +1,6 @@
 class CreateAuthors < ActiveRecord::Migration
   def change
     create_table :authors do |t|
-      t.references :credit, index: true, foreign_key: true
       t.string :name
       t.string :url
       t.string :twitter
