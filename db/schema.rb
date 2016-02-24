@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160223130701) do
+ActiveRecord::Schema.define(version: 20160224153858) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "name",         limit: 100, null: false
@@ -24,16 +24,20 @@ ActiveRecord::Schema.define(version: 20160223130701) do
     t.datetime "updated_at",               null: false
     t.string   "update_by",    limit: 255
     t.string   "nico",         limit: 255
+    t.string   "disp_name",    limit: 255
   end
 
-  add_index "authors", ["name"], name: "index_authors_on_name", using: :btree
+  add_index "authors", ["name"], name: "index_authors_on_name", unique: true, using: :btree
 
   create_table "credit_logs", force: :cascade do |t|
-    t.integer  "user_id",    limit: 4
-    t.integer  "credit_id",  limit: 4
-    t.integer  "author_id",  limit: 4
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
+    t.integer  "user_id",      limit: 4
+    t.integer  "credit_id",    limit: 4
+    t.integer  "author_id",    limit: 4
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.string   "name",         limit: 255
+    t.string   "distribution", limit: 255
+    t.string   "url",          limit: 255
   end
 
   add_index "credit_logs", ["author_id"], name: "index_credit_logs_on_author_id", using: :btree
@@ -46,13 +50,13 @@ ActiveRecord::Schema.define(version: 20160223130701) do
     t.integer  "wanted_id",    limit: 4,   null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
-    t.integer  "author_id",    limit: 4
-    t.string   "name",         limit: 255
+    t.integer  "author_id",    limit: 4,   null: false
+    t.string   "name",         limit: 255, null: false
     t.string   "url",          limit: 255
   end
 
   add_index "credits", ["author_id"], name: "index_credits_on_author_id", using: :btree
-  add_index "credits", ["wanted_id"], name: "index_credits_on_wanted_id", using: :btree
+  add_index "credits", ["wanted_id"], name: "index_credits_on_wanted_id", unique: true, using: :btree
 
   create_table "emms", force: :cascade do |t|
     t.string   "original_name",  limit: 255, null: false

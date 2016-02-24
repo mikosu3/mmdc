@@ -15,11 +15,10 @@
 
     <tbody>
       <%= content_tag_for(:tr, @credits) do |credit| %>
-            <td><%= credit.index %></td>
-            <td><%= credit.edit %></td>
-            <td><%= link_to 'Show', credit %></td>
-        <td><%= link_to 'Edit', edit_credit_path(credit) %></td>
-        <td><%= link_to 'Destroy', credit, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to credit.name, edit_credit_path(credit) %></td>
+            <td><%= credit.author.name %></td>
+            <td><%= credit.wanted.folder_name %></td>
+            <td><%= credit.wanted.file_name %></td>
       <% end %>
     </tbody>
   </table>

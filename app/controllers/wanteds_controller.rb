@@ -4,7 +4,7 @@ class WantedsController < ApplicationController
   # GET /wanteds
   # GET /wanteds.json
   def index
-    @wanteds = Wanted.all
+    @wanteds = Wanted.includes(:credit).where(credits: {id: nil})
   end
 
   # GET /wanteds/1/edit

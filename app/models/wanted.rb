@@ -1,3 +1,3 @@
 class Wanted < ActiveRecord::Base
-  has_many :credit
+  has_one :credit
 end

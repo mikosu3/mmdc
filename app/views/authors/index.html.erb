@@ -11,6 +11,7 @@
     <thead>
       <tr>
             <th>作者名</th>
+            <th>表記名</th>
             <th>Web</th>
             <th>ニコニコ</th>
             <th>Twitter</th>
@@ -22,7 +23,8 @@
     <tbody>
       <%= content_tag_for(:tr, @authors) do |author| %>
             <td><%= link_to author.name, edit_author_path(author) %></td>
-            <td><%= unless author.url.empty?  then link_to '外部サイト', author.url , :target => "_blank" end %></td>
+            <td><%= author.disp_name %></td>
+            <td><%= unless author.url.blank?  then link_to '外部サイト', author.url , :target => "_blank" end %></td>
             <td><%= author.nico %></td>
             <td><%= author.twitter %></td>
             <td><%= author.pixiv %></td>
