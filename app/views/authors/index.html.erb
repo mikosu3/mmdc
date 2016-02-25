@@ -6,25 +6,27 @@
   <h1>作者情報</h1>
 </div>
 
-<%= search_form_for @q do |f| %>
+<%= search_form_for @q , html: { class: "form-horizontal", role: "form"} do |f|  %>
 
 <div class="panel panel-primary">
     <div class="panel-heading">
-        検索条件
+        <span class="glyphicon glyphicon-search" aria-hidden="true">
+        <span>検索条件</span>
     </div>
     <div class="panel-body">
         <div class="form-group">
             <%= f.label :name_cont, '作者名', class: "col-sm-2 control-label" %>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
               <%= f.text_field :name_cont, class: "form-control" %>
             </div>
             <%= f.label :disp_name_cont, "表記名", class: "col-sm-2 control-label" %>
-            <div class="col-sm-4">
+            <div class="col-sm-3">
               <%= f.search_field :disp_name_cont, class: "form-control" %>
+            </div>
+            <div class="col-sm-2">
             </div>
         </div>
         <div class="form-group">
-            <hr>
             <div class="col-sm-4 col-sm-offset-2"><%= f.submit '検索' ,class: "btn btn-primary" %></div>
         </div>
     </div>

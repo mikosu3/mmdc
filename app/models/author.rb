@@ -1,7 +1,5 @@
 class Author < ActiveRecord::Base
 
-  paginates_per 2
-
   validates :name, presence: true
   validates :name, length: { maximum: 100 }
   validates :name, uniqueness: true

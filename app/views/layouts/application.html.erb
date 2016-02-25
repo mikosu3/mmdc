@@ -31,13 +31,13 @@
       </div>
       <div id="navbar" class="collapse navbar-collapse">
         <ul class="nav navbar-nav">
-          <li class= "<%= 'active' if controller.controller_name == 'videos' %>"><%= link_to "動画情報", { controller: "videos" } %></li>
-          <li class= "<%= 'active' if controller.controller_name == 'wanteds' %>"><%= link_to "Wanted", { controller: "wanteds" } %></li>
-          <li class= "<%= 'active' if controller.controller_name == 'credits' %>"><%= link_to "クレジット情報", { controller: "credits" } %></li>
-          <li class= "<%= 'active' if controller.controller_name == 'authors' %>"><%= link_to "作者情報", { controller: "authors" } %></li>
+          <li class= "<%= 'active' if controller.controller_name == 'videos' %>"><%= link_to sanitize('<i class="glyphicon glyphicon-film"></i> ') + "動画情報", { controller: "videos" } %></li>
+          <li class= "<%= 'active' if controller.controller_name == 'wanteds' %>"><%= link_to sanitize('<i class="glyphicon glyphicon-comment"></i> ') + "Wanted", { controller: "wanteds" } %></li>
+          <li class= "<%= 'active' if controller.controller_name == 'credits' %>"><%= link_to sanitize('<i class="glyphicon glyphicon-list-alt"></i> ') + "クレジット情報", { controller: "credits" } %></li>
+          <li class= "<%= 'active' if controller.controller_name == 'authors' %>"><%= link_to sanitize('<i class="glyphicon glyphicon-user"></i> ') + "作者情報", { controller: "authors" } %></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#">ログアウト</a></li>
+            <li><a href="#"><i class="glyphicon glyphicon-log-out"></i> ログアウト</a></li>
         </ul>
       </div>
     </div>
