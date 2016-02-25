@@ -5,6 +5,7 @@ class AuthorsController < ApplicationController
   # GET /authors.json
   def index
     @q        = Author.search(params[:q])
+    @q.sorts = 'name asc' if @q.sorts.empty?
     @authors = @q.result.page(params[:page])
   end
 
