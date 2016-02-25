@@ -211,3 +211,19 @@ ja:
     disp_name: 表記名
     distribution: 配布先ID
     author_name: 作者名
+
+  views:
+    pagination:
+      first: "&laquo;"
+      last: "&raquo;"
+      previous: "&lsaquo;"
+      next: "&rsaquo;"
+      truncate: "..."
+  helpers:
+    page_entries_info:
+      one_page:
+        zero: "<strong>該当データがありません。</strong>"
+        one: "<strong>1件中 1-1 件を表示</strong>"
+        display_entries: '%{entry_name}の1-%{count}件を表示中 / 合計%{count}件'
+      more_pages:
+        display_entries: '%{entry_name}の%{first}-%{last}件を表示中 / 合計%{total}件'

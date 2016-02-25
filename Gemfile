@@ -51,6 +51,8 @@ gem 'rails-jquery-autocomplete'
 
 gem 'kaminari'
 
+gem "ransack"
+
 source 'http://rails-assets.org' do
   gem 'rails-assets-bootstrap-fileinput', '~> 2.5.0'
 end

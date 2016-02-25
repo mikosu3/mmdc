@@ -1,5 +1,6 @@
 class Author < ActiveRecord::Base
 
+  paginates_per 2
 
   validates :name, presence: true
   validates :name, length: { maximum: 100 }
@@ -15,4 +16,9 @@ class Author < ActiveRecord::Base
 
   has_many :credit
 
+
+  # 検索許可するパラメータ
+  def self.ransackable_attributes auth_object = nil
+    %w(name disp_name)
+  end
 end

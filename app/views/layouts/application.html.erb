@@ -36,6 +36,9 @@
           <li class= "<%= 'active' if controller.controller_name == 'credits' %>"><%= link_to "クレジット情報", { controller: "credits" } %></li>
           <li class= "<%= 'active' if controller.controller_name == 'authors' %>"><%= link_to "作者情報", { controller: "authors" } %></li>
         </ul>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="#">ログアウト</a></li>
+        </ul>
       </div>
     </div>
   </nav>

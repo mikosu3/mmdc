@@ -4,7 +4,8 @@ class AuthorsController < ApplicationController
   # GET /authors
   # GET /authors.json
   def index
-    @authors = Author.all
+    @q        = Author.search(params[:q])
+    @authors = @q.result.page(params[:page])
   end
 
   # GET /authors/new
