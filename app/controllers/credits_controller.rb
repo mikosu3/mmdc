@@ -1,10 +1,11 @@
 class CreditsController < ApplicationController
   before_action :set_credit, only: [:show, :edit, :update, :destroy]
+  autocomplete :author, :name, :full => true
 
   # GET /credits
   # GET /credits.json
   def index
-    @credits = Credit.all
+    @credits = Credit.all.page(params[:page])
   end
 
   # GET /credits/1
@@ -28,6 +29,9 @@ class CreditsController < ApplicationController
   # POST /credits.json
   def create
     @credit = Credit.new(credit_params)
+
+    @credit.screen_name = get_screen_name
+    @credit.user_id = get_user_id
 
     respond_to do |format|
       if @credit.save

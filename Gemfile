@@ -45,6 +45,12 @@ gem 'inifile'
 gem 'honoka-rails'
 gem 'simple_form'
 
+gem 'jquery-rails'
+gem 'jquery-ui-rails'
+gem 'rails-jquery-autocomplete'
+
+gem 'kaminari'
+
 source 'http://rails-assets.org' do
   gem 'rails-assets-bootstrap-fileinput', '~> 2.5.0'
 end

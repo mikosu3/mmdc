@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   resources :credits, :except => [:show, :delete] do
     collection do
       get "/new/:wanted_id" => "credits#new", as: "add"
+      get :autocomplete_author_name
     end
   end
 #  resources :credits do
