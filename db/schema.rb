@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160224153858) do
+ActiveRecord::Schema.define(version: 20160226102245) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "name",         limit: 100, null: false
@@ -65,6 +65,14 @@ ActiveRecord::Schema.define(version: 20160224153858) do
     t.datetime "created_at",                 null: false
     t.datetime "updated_at",                 null: false
     t.integer  "video_id",       limit: 4
+  end
+
+  create_table "histories", force: :cascade do |t|
+    t.string   "link",        limit: 255
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
+    t.string   "item",        limit: 255
+    t.string   "modify_type", limit: 255
   end
 
   create_table "infos", force: :cascade do |t|

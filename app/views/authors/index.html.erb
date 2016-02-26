@@ -8,7 +8,7 @@
 
 <%= search_form_for @q , html: { class: "form-horizontal", role: "form"} do |f|  %>
 
-<div class="panel panel-primary">
+<div class="panel panel-default">
     <div class="panel-heading">
         <span class="glyphicon glyphicon-search" aria-hidden="true">
         <span>検索条件</span>
@@ -27,35 +27,33 @@
             </div>
         </div>
         <div class="form-group">
-            <div class="col-sm-4 col-sm-offset-2"><%= f.submit '検索' ,class: "btn btn-primary" %></div>
+            <div class="col-sm-4 col-sm-offset-2"><%= f.submit '検索' ,class: "btn btn-primary" %> <a href="#"  class="btn btn-default" onclick="clearFormAll();return false">リセット</a></div>
         </div>
     </div>
 </div>
 <% end %>
 
 <div class="table-responsive">
+  <div class="text-right"><%= @authors.offset_value + 1 %>〜<%= @authors.offset_value + @authors.length %>件 / <%= @authors.total_count %>件</div>
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
             <th><%= sort_link(@q, :name, "作者名") %></th>
             <th><%= sort_link(@q, :disp_name) %></th>
             <th>Web</th>
-            <th>ニコニコ</th>
-            <th>Twitter</th>
-            <th>Pixiv</th>
-            <th>Email</th>
       </tr>
     </thead>
-
     <tbody>
       <%= content_tag_for(:tr, @authors) do |author| %>
             <td><%= link_to author.name, edit_author_path(author) %></td>
             <td><%= author.disp_name %></td>
-            <td><%= unless author.url.blank?  then link_to '外部サイト', author.url , :target => "_blank" end %></td>
-            <td><%= author.nico %></td>
-            <td><%= author.twitter %></td>
-            <td><%= author.pixiv %></td>
-            <td><%= mail_to(author.email) %></td>
+            <td>
+                <% unless author.nico.blank? %><%= link_to image_tag('icons/nico.jpg' ,{:class => "img-rounded", :width => "23px"}), 'http://www.nicovideo.jp/user/' + author.nico , :target => "_blank" %><% end %>
+                <% unless author.twitter.blank? %><%= link_to image_tag('icons/twitter.jpg' ,{:class => "img-rounded", :width => "23px"}), 'https://twitter.com/' + author.twitter , :target => "_blank" %><% end %>
+                <% unless author.pixiv.blank? %><%= link_to image_tag('icons/pixiv.jpg' ,{:class => "img-rounded", :height => "23px"}), 'http://www.pixiv.net/member.php?id=' + author.pixiv , :target => "_blank" %><% end %>
+                <% unless author.url.blank? %><%= link_to sanitize('<span class="glyphicon glyphicon-home"></span>'), author.url , :target => "_blank" %><% end %>
+                <% unless author.email.blank? %><%= mail_to author.email, sanitize('<span class="glyphicon glyphicon-envelope"></span>') %><% end %>
+            </td>
       <% end %>
     </tbody>
   </table>

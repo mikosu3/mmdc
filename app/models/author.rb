@@ -14,9 +14,41 @@ class Author < ActiveRecord::Base
 
   has_many :credit
 
+  attr_accessor :modify_type
+
+  before_save :set_disp_name
+
+  after_create do
+    self.modify_type = '登録'
+  end
+
+  after_update do
+    self.modify_type = '更新'
+  end
+  after_save :add_history
 
   # 検索許可するパラメータ
   def self.ransackable_attributes auth_object = nil
     %w(name disp_name)
   end
+
+  private
+
+    # 表記名が空だった場合は作者名と同じにする
+    def set_disp_name
+      if self.disp_name.blank? then
+        self.disp_name = self.name
+      end
+    end
+
+    def add_history
+      history = History.new
+
+      history.link = '/authors/' + self.id.to_s + '/edit'
+      history.item = '作者情報'
+      history.modify_type = self.modify_type
+
+      history.save
+    end
+
 end

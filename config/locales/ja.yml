@@ -200,7 +200,6 @@ ja:
       long: "%Y年%m月%d日(%a) %H時%M分%S秒 %z"
       short: "%y/%m/%d %H:%M"
     pm: 午後
-
   attributes:
     video_name: 動画名
     name: 名前
@@ -211,7 +210,6 @@ ja:
     disp_name: 表記名
     distribution: 配布先ID
     author_name: 作者名
-
   views:
     pagination:
       first: "&laquo;"
@@ -219,11 +217,3 @@ ja:
       previous: "&lsaquo;"
       next: "&rsaquo;"
       truncate: "..."
-  helpers:
-    page_entries_info:
-      one_page:
-        zero: "<strong>該当データがありません。</strong>"
-        one: "<strong>1件中 1-1 件を表示</strong>"
-        display_entries: '%{entry_name}の1-%{count}件を表示中 / 合計%{count}件'
-      more_pages:
-        display_entries: '%{entry_name}の%{first}-%{last}件を表示中 / 合計%{total}件'
