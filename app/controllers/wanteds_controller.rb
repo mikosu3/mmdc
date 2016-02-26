@@ -4,7 +4,9 @@ class WantedsController < ApplicationController
   # GET /wanteds
   # GET /wanteds.json
   def index
-    @wanteds = Wanted.includes(:credit).where(credits: {id: nil})
+    @q        = Wanted.includes(:credit).where(credits: {id: nil}).search(params[:q])
+    @q.sorts = 'folder_name asc' if @q.sorts.empty?
+    @wanteds = @q.result.page(params[:page])
   end
 
   # GET /wanteds/1/edit
