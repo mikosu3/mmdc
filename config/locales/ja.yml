@@ -206,7 +206,7 @@ ja:
     url: URL
     email: メールアドレス
     nico: ニコニコ
-    update_by: 最終更新者
+    updated_screen_name: 最終更新者
     disp_name: 表記名
     distribution: 配布先ID
     author_name: 作者名

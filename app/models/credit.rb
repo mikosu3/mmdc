@@ -1,6 +1,5 @@
 class Credit < ActiveRecord::Base
   attr_accessor :author_name
-  attr_accessor :screen_name
   attr_accessor :user_id
 
   belongs_to :wanted
@@ -28,7 +27,7 @@ class Credit < ActiveRecord::Base
       if author.nil? then
         author = Author.new
         author.name = author_name
-        author.update_by = self.screen_name
+        author.updated_by = self.user_id
         author.save
       end
 

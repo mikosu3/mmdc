@@ -30,7 +30,6 @@ class CreditsController < ApplicationController
   def create
     @credit = Credit.new(credit_params)
 
-    @credit.screen_name = get_screen_name
     @credit.user_id = get_user_id
 
     respond_to do |format|
@@ -70,7 +69,6 @@ class CreditsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_credit
       @credit = Credit.find(params[:id])
-      @credit.screen_name = get_screen_name
       @credit.user_id = get_user_id
     end
 

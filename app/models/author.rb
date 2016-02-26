@@ -15,6 +15,7 @@ class Author < ActiveRecord::Base
   has_many :credit
 
   attr_accessor :modify_type
+  attr_accessor :updated_screen_name
 
   before_save :set_disp_name
 
@@ -26,6 +27,10 @@ class Author < ActiveRecord::Base
     self.modify_type = '更新'
   end
   after_save :add_history
+
+  after_find do
+    self.updated_screen_name = User.find(self.updated_by).screen_name
+  end
 
   # 検索許可するパラメータ
   def self.ransackable_attributes auth_object = nil

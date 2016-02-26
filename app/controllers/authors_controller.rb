@@ -25,7 +25,7 @@ class AuthorsController < ApplicationController
 
     respond_to do |format|
 
-      @author.update_by = get_screen_name
+      @author.updated_by = get_user_id
 
       if @author.save
         format.html { redirect_to authors_url, notice: '作者情報を登録しました。' }
@@ -42,7 +42,7 @@ class AuthorsController < ApplicationController
   def update
     respond_to do |format|
 
-      @author.update_by = get_screen_name
+      @author.updated_by = get_user_id
 
       if @author.update(author_params)
         format.html { redirect_to authors_url, notice: '作者情報を更新しました。' }

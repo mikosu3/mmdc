@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160226105506) do
+ActiveRecord::Schema.define(version: 20160226120454) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "name",         limit: 100, null: false
@@ -22,9 +22,9 @@ ActiveRecord::Schema.define(version: 20160226105506) do
     t.integer  "lock_version", limit: 4
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
-    t.string   "update_by",    limit: 255
     t.string   "nico",         limit: 255
     t.string   "disp_name",    limit: 255
+    t.integer  "updated_by",   limit: 4
   end
 
   add_index "authors", ["name"], name: "index_authors_on_name", unique: true, using: :btree

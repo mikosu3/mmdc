@@ -6,12 +6,12 @@ class ApplicationController < ActionController::Base
 
   #ログインしているユーザーID
   def get_user_id
-    return 3
+    return 1
   end
 
   #ログインしているユーザーのツイッター名
   def get_screen_name
-    return "mikosu3"
+    return User.find(get_user_id).screen_name
   end
 
   private
