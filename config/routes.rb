@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :wanteds, :except => [:show, :delete]
   resources :emms, :except => [:show, :delete]
   resources :videos, :except => [:show]
-  resources :infos, :only => [:index]
+  resources :infos
   resources :credits, :except => [:show, :delete] do
     collection do
       get "/new/:wanted_id" => "credits#new", as: "add"

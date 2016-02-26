@@ -1,15 +1,20 @@
 <div class="page-header"><h1>お知らせ</h1></div>
 <dl>
-    <dt>2016/02/22</dt>
-    <dd><a href="#">うぇうぇっうぇっうぇうぇーーーーーーーい</a></dd>
-    <dt>2016/02/22</dt>
-    <dd><a href="#">うぇうぇっうぇっうぇうぇーーーーーーーい</a></dd>
-    <dt>2016/02/22</dt>
-    <dd><a href="#">うぇうぇっうぇっうぇうぇーーーーーーーい</a></dd>
+    <% @side_infos.each do | info | %>
+    <dt><%= info.date.strftime('%Y/%m/%d') %></dt>
+    <dd><%= link_to info.title, info %></dd>
+    <% end %>
+    <% if @side_infos.length == 3 then %>
+        <dd><span class="small"><a href="/infos">全て見る</a></span></dd>
+    <% end %>
 </dl>
+
+
 <hr>
 <h2>更新情報</h2>
 <dl>
-    <dt>2016/02/22 20:22:22</dt>
-    <dd>クレジット：<a href="#">xxxx</a> 登録</dd>
+    <% @histories.each do | history | %>
+        <dt><%= history.created_at.strftime('%Y/%m/%d %H:%M:%S') %></dt>
+        <dd><%= history.item %>:<%= link_to history.item_name, history.link %> <%= history.modify_type %></dd>
+    <% end %>
 </dl>

@@ -4,7 +4,7 @@ class InfosController < ApplicationController
   # GET /infos
   # GET /infos.json
   def index
-    @infos = Info.all
+    @infos = Info.all.order(id: :desc)
   end
 
   # GET /infos/1

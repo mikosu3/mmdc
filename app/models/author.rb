@@ -46,6 +46,7 @@ class Author < ActiveRecord::Base
 
       history.link = '/authors/' + self.id.to_s + '/edit'
       history.item = '作者情報'
+      history.item_name = self.name
       history.modify_type = self.modify_type
 
       history.save

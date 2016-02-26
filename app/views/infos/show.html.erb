@@ -7,20 +7,6 @@
     <span class="glyphicon glyphicon-pencil"></span>
     Edit
   <% end %>
-  <h1>Show info</h1>
+  <h1><%= @info.title %> <small><%= @info.date.strftime('%Y/%m/%d') %></small></h1>
 </div>
-
-<dl class="dl-horizontal">
-  <dt>Date:</dt>
-  <dd><%= @info.date %></dd>
-
-  <dt>Title:</dt>
-  <dd><%= @info.title %></dd>
-
-  <dt>Note:</dt>
-  <dd><%= @info.note %></dd>
-
-  <dt>Lock version:</dt>
-  <dd><%= @info.lock_version %></dd>
-
-</dl>
+<%= simple_format(@info.note) %>
