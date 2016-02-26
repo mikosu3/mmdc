@@ -35,7 +35,7 @@ class CreditsController < ApplicationController
 
     respond_to do |format|
       if @credit.save
-        format.html { redirect_to credits_path, notice: 'クレジット情報を登録しました。' }
+        format.html { redirect_to wanteds_path, notice: 'クレジット情報を登録しました。' }
         format.json { render :index, status: :created, location: @credit }
       else
         @wanted = Wanted.find(@credit.wanted_id)
