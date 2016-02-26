@@ -15,6 +15,6 @@
 <dl>
     <% @histories.each do | history | %>
         <dt><%= history.created_at.strftime('%Y/%m/%d %H:%M:%S') %></dt>
-        <dd><%= history.item %>:<%= link_to history.item_name, history.link %> <%= history.modify_type %></dd>
+        <dd><%= history.item %>:<%= link_to history.item_name, history.link %> <%= history.is_create? ? '登録':'更新' %></dd>
     <% end %>
 </dl>

@@ -14,27 +14,23 @@ class Author < ActiveRecord::Base
 
   has_many :credit
 
-  attr_accessor :modify_type
   attr_accessor :updated_screen_name
 
   before_save :set_disp_name
 
-  after_create do
-    self.modify_type = '登録'
-  end
-
   after_update do
-    self.modify_type = '更新'
+    @is_create = false
   end
-  after_save :add_history
 
-  after_find do
-    self.updated_screen_name = User.find(self.updated_by).screen_name
-  end
+  after_save :add_history
 
   # 検索許可するパラメータ
   def self.ransackable_attributes auth_object = nil
     %w(name disp_name)
+  end
+
+  def updated_screen_name
+    return User.find(self.updated_by).screen_name
   end
 
   private
@@ -50,9 +46,14 @@ class Author < ActiveRecord::Base
       history = History.new
 
       history.link = '/authors/' + self.id.to_s + '/edit'
-      history.item = '作者情報'
+      history.item = '作者'
       history.item_name = self.name
-      history.modify_type = self.modify_type
+
+      if @is_create.nil?
+        @is_create = true
+      end
+
+      history.is_create = @is_create
 
       history.save
     end
