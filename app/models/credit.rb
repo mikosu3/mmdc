@@ -15,15 +15,9 @@ class Credit < ActiveRecord::Base
   validates :distribution, length: { maximum: 250 }, format: { with: /(^$)|(^(sm|im|td)[0-9]+$)/ix, allow_blank: true }
   validates :url, format: { with: /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix, allow_blank: true }, length: { maximum: 250 }
 
-  attr_accessor :modify_type
-  after_create do
-    self.modify_type = '登録'
-  end
-
   after_update do
-    self.modify_type = '更新'
+    @is_create = false
   end
-
 
   # 作者名からIDを取得　なければ登録して取得
   private
@@ -65,7 +59,12 @@ class Credit < ActiveRecord::Base
       history.link = '/credits/' + self.id.to_s + '/edit'
       history.item = 'クレジット'
       history.item_name = self.name
-      history.modify_type = self.modify_type
+
+      if @is_create.nil?
+        @is_create = true
+      end
+
+      history.is_create = @is_create
 
       history.save
     end
