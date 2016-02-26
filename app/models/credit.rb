@@ -1,9 +1,12 @@
 class Credit < ActiveRecord::Base
   attr_accessor :author_name
   attr_accessor :user_id
+  attr_accessor :distribution_url
 
   belongs_to :wanted
   belongs_to :author
+  has_many :credit_log, dependent: :destroy
+
   before_save :set_author_id
   after_save :save_credit_log
 
@@ -18,6 +21,26 @@ class Credit < ActiveRecord::Base
   after_update do
     @is_create = false
   end
+
+  # 検索許可するパラメータ
+  def self.ransackable_attributes auth_object = nil
+    %w(wanted_file_name_count wanted_folder_name_count author_name_count name)
+  end
+
+  # 配布先(ニコニコのURL)を取得
+  def distribution_url
+    case self.distribution
+    when /^sm[0-9]+/ then
+      return 'http://www.nicovideo.jp/watch/' + distribution
+    when /^im[0-9]+/ then
+      return 'http://seiga.nicovideo.jp/seiga/' + distribution
+    when /^td[0-9]+/ then
+      return 'http://3d.nicovideo.jp/works/' + distribution
+    else
+      return nil
+    end
+  end
+
 
   # 作者名からIDを取得　なければ登録して取得
   private

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160226125322) do
+ActiveRecord::Schema.define(version: 20160226143730) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "name",         limit: 100, null: false
@@ -133,7 +133,6 @@ ActiveRecord::Schema.define(version: 20160226125322) do
   add_index "wanteds", ["file_name", "folder_name", "extension"], name: "index_wanteds_on_file_name_and_folder_name_and_extension", unique: true, using: :btree
 
   add_foreign_key "credit_logs", "authors"
-  add_foreign_key "credit_logs", "credits"
   add_foreign_key "credit_logs", "users"
   add_foreign_key "credits", "authors"
   add_foreign_key "credits", "wanteds"

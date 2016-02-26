@@ -5,7 +5,9 @@ class CreditsController < ApplicationController
   # GET /credits
   # GET /credits.json
   def index
-    @credits = Credit.all.page(params[:page])
+    @q        = Credit.search(params[:q])
+    @q.sorts = 'name asc' if @q.sorts.empty?
+    @credits = @q.result.page(params[:page])
   end
 
   # GET /credits/1
