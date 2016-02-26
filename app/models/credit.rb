@@ -1,6 +1,5 @@
 class Credit < ActiveRecord::Base
   attr_accessor :author_name
-  attr_accessor :user_id
   attr_accessor :distribution_url
 
   belongs_to :wanted
@@ -18,6 +17,9 @@ class Credit < ActiveRecord::Base
   validates :distribution, length: { maximum: 250 }, format: { with: /(^$)|(^(sm|im|td)[0-9]+$)/ix, allow_blank: true }
   validates :url, format: { with: /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix, allow_blank: true }, length: { maximum: 250 }
 
+  attr_accessor :updated_screen_name
+
+
   after_update do
     @is_create = false
   end
@@ -25,6 +27,10 @@ class Credit < ActiveRecord::Base
   # 検索許可するパラメータ
   def self.ransackable_attributes auth_object = nil
     %w(wanted_file_name_count wanted_folder_name_count author_name_count name)
+  end
+
+  def updated_screen_name
+    return User.find(self.updated_by).screen_name
   end
 
   # 配布先(ニコニコのURL)を取得
@@ -53,7 +59,7 @@ class Credit < ActiveRecord::Base
       if author.nil? then
         author = Author.new
         author.name = author_name
-        author.updated_by = self.user_id
+        author.updated_by = self.updated_by
         author.save
       end
 
@@ -65,7 +71,7 @@ class Credit < ActiveRecord::Base
 
       credit_log.credit_id = self.id
       credit_log.author_id = self.author_id
-      credit_log.user_id = self.user_id
+      credit_log.user_id = self.updated_by
       credit_log.name = self.name
       credit_log.distribution = self.distribution
       credit_log.url = self.url

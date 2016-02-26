@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160226143730) do
+ActiveRecord::Schema.define(version: 20160226145321) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "name",         limit: 100, null: false
@@ -53,6 +53,7 @@ ActiveRecord::Schema.define(version: 20160226143730) do
     t.integer  "author_id",    limit: 4,   null: false
     t.string   "name",         limit: 255, null: false
     t.string   "url",          limit: 255
+    t.integer  "updated_by",   limit: 4
   end
 
   add_index "credits", ["author_id"], name: "index_credits_on_author_id", using: :btree

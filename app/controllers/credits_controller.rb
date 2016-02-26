@@ -31,8 +31,7 @@ class CreditsController < ApplicationController
   # POST /credits.json
   def create
     @credit = Credit.new(credit_params)
-
-    @credit.user_id = get_user_id
+    @credit.updated_by = get_user_id
 
     respond_to do |format|
       if @credit.save
@@ -49,6 +48,8 @@ class CreditsController < ApplicationController
   # PATCH/PUT /credits/1
   # PATCH/PUT /credits/1.json
   def update
+
+    @credit.updated_by = get_user_id
 
     respond_to do |format|
       if @credit.update(credit_params)
@@ -71,7 +72,6 @@ class CreditsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_credit
       @credit = Credit.find(params[:id])
-      @credit.user_id = get_user_id
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.
