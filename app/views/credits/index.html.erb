@@ -38,7 +38,7 @@
 <% end %>
 
 <div class="table-responsive">
-  <div class="text-right"><%= @credits.offset_value + 1 %>〜<%= @credits.offset_value + @credits.length %>件 / <%= @credits.total_count %>件</div>
+  <div class="text-right"><% unless @credits.total_count == 0 %><%= @credits.offset_value + 1 %>〜<%= @credits.offset_value + @credits.length %>件 / <% end %><%= @credits.total_count %>件</div>
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
