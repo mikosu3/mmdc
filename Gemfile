@@ -53,6 +53,12 @@ gem 'kaminari'
 
 gem "ransack"
 
+gem 'seed-fu', '~> 2.3'
+
+gem 'omniauth'
+gem 'omniauth-twitter'
+gem 'settingslogic'
+
 source 'http://rails-assets.org' do
   gem 'rails-assets-bootstrap-fileinput', '~> 2.5.0'
 end
