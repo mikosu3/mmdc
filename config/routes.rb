@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'home/index'
+
   resources :authors, :except => [:show, :delete]
   resources :wanteds, :except => [:show, :delete]
   resources :emms, :except => [:show, :delete]
@@ -10,6 +12,14 @@ Rails.application.routes.draw do
       get :autocomplete_author_name
     end
   end
+
+  root 'home#index'
+  get "home/index"
+
+  get '/auth/:provider/callback', :to => 'sessions#callback'
+  post '/auth/:provider/callback', :to => 'sessions#callback'
+  get '/logout' => 'sessions#destroy', :as => :logout
+
 #  resources :credits do
 #    get "/new/:wanted_id" => "credits#new", as: "add"
 #  end

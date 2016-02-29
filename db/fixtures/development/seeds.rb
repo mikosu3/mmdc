@@ -6,6 +6,6 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-User.create(:is_admin => true, :screen_name => "mikosu3", :twitter_user_id => 1, :access_token => "", :access_token_secret => "", :ticket => "")
-User.create(:is_admin => false, :screen_name => "mikosu3a", :twitter_user_id => 2, :access_token => "", :access_token_secret => "", :ticket => "")
-User.create(:is_admin => false, :screen_name => "mikosu3b", :twitter_user_id => 3, :access_token => "", :access_token_secret => "", :ticket => "")
+User.create(:is_admin => true, :screen_name => "mikosu3",  :uid => "322435416", :provider => "twitter", :name => "みこす")
+User.create(:is_admin => false, :screen_name => "mikosu3b",  :uid => "3aaa416", :provider => "twitter", :name => "みこすb")
+User.create(:is_admin => false, :screen_name => "mikosu3c",  :uid => "322b416", :provider => "twitter", :name => "みこすc")

@@ -203,7 +203,6 @@ GEM
     seed-fu (2.3.5)
       activerecord (>= 3.1, < 4.3)
       activesupport (>= 3.1, < 4.3)
-    settingslogic (2.0.9)
     simple_form (3.2.1)
       actionpack (> 4, < 5.1)
       activemodel (> 4, < 5.1)
@@ -263,7 +262,6 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   sdoc (~> 0.4.0)
   seed-fu (~> 2.3)
-  settingslogic
   simple_form
   spring
   turbolinks

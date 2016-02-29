@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160228153730) do
+ActiveRecord::Schema.define(version: 20160229115437) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "name",         limit: 100, null: false
@@ -109,16 +109,17 @@ ActiveRecord::Schema.define(version: 20160228153730) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.boolean  "is_admin",                        default: false, null: false
-    t.string   "screen_name",         limit: 255,                 null: false
-    t.integer  "twitter_user_id",     limit: 4,                   null: false
-    t.integer  "lock_version",        limit: 4
-    t.string   "access_token",        limit: 255,                 null: false
-    t.string   "access_token_secret", limit: 255,                 null: false
-    t.string   "ticket",              limit: 255,                 null: false
-    t.datetime "created_at",                                      null: false
-    t.datetime "updated_at",                                      null: false
+    t.boolean  "is_admin",                 default: false, null: false
+    t.string   "screen_name",  limit: 255,                 null: false
+    t.integer  "lock_version", limit: 4
+    t.datetime "created_at",                               null: false
+    t.datetime "updated_at",                               null: false
+    t.string   "uid",          limit: 255,                 null: false
+    t.string   "provider",     limit: 255,                 null: false
+    t.string   "name",         limit: 255
   end
+
+  add_index "users", ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true, using: :btree
 
   create_table "videos", force: :cascade do |t|
     t.string   "name",         limit: 255
@@ -142,6 +143,7 @@ ActiveRecord::Schema.define(version: 20160228153730) do
   add_index "wanteds", ["file_name", "folder_name", "extension"], name: "index_wanteds_on_file_name_and_folder_name_and_extension", unique: true, using: :btree
 
   add_foreign_key "credit_logs", "authors"
+  add_foreign_key "credit_logs", "credits"
   add_foreign_key "credit_logs", "users"
   add_foreign_key "credits", "authors"
   add_foreign_key "credits", "wanteds"

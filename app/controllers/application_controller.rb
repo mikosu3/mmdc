@@ -4,9 +4,22 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :get_side_info
 
+  protect_from_forgery
+
+  def login_required
+    if session[:user_id]
+      @current_user = User.find(session[:user_id])
+    else
+      redirect_to root_path
+    end
+
+  end
+
+  helper_method :current_user
+
   #ログインしているユーザーID
   def get_user_id
-    return 1
+    return session[:user_id]
   end
 
   #ログインしているユーザーのツイッター名
@@ -20,5 +33,9 @@ class ApplicationController < ActionController::Base
       @histories = History.order(id: :desc).first(30)
       @side_infos = Info.order(id: :desc).first(3)
     end
+
+  def current_user
+    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+  end
 
 end
