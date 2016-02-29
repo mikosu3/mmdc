@@ -4,7 +4,12 @@ class VideosController < ApplicationController
   # GET /videos
   # GET /videos.json
   def index
-    @videos = Video.where(user_id: get_user_id)
+    @videos = Video.where(user_id: get_user_id, is_show: true).order(id: :desc).page(params[:page])
+
+    # 子データの集計を行う
+    @videos.each do | video |
+      Video.set_total video
+    end
   end
 
   # GET /videos/1
@@ -62,9 +67,12 @@ class VideosController < ApplicationController
   # DELETE /videos/1
   # DELETE /videos/1.json
   def destroy
-    @video.destroy
+
+    #論理削除
+    @video.is_show = false
+    @video.save
     respond_to do |format|
-      format.html { redirect_to videos_url, notice: 'Video was successfully destroyed.' }
+      format.html { redirect_to videos_url, notice: '動画情報を削除しました' }
       format.json { head :no_content }
     end
   end

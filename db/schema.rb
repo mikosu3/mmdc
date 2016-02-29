@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160229115437) do
+ActiveRecord::Schema.define(version: 20160229150944) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "name",         limit: 100, null: false
@@ -24,7 +24,7 @@ ActiveRecord::Schema.define(version: 20160229115437) do
     t.datetime "updated_at",               null: false
     t.string   "nico",         limit: 255
     t.string   "disp_name",    limit: 255
-    t.integer  "updated_by",   limit: 4
+    t.integer  "updated_by",   limit: 4,   null: false
   end
 
   add_index "authors", ["name"], name: "index_authors_on_name", unique: true, using: :btree
@@ -53,7 +53,7 @@ ActiveRecord::Schema.define(version: 20160229115437) do
     t.integer  "author_id",    limit: 4,   null: false
     t.string   "name",         limit: 255, null: false
     t.string   "url",          limit: 255
-    t.integer  "updated_by",   limit: 4
+    t.integer  "updated_by",   limit: 4,   null: false
   end
 
   add_index "credits", ["author_id"], name: "index_credits_on_author_id", using: :btree
@@ -123,10 +123,11 @@ ActiveRecord::Schema.define(version: 20160229115437) do
 
   create_table "videos", force: :cascade do |t|
     t.string   "name",         limit: 255
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
+    t.datetime "created_at",                              null: false
+    t.datetime "updated_at",                              null: false
     t.integer  "user_id",      limit: 4
     t.integer  "lock_version", limit: 4
+    t.boolean  "is_show",                  default: true
   end
 
   add_index "videos", ["user_id"], name: "index_videos_on_user_id", using: :btree

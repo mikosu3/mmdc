@@ -7,13 +7,15 @@
 </div>
 
 <div class="table-responsive">
+  <div class="text-right"><% unless @videos.total_count == 0 %><%= @videos.offset_value + 1 %>〜<%= @videos.offset_value + @videos.length %>件 / <% end %><%= @videos.total_count %>件</div>
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
         <th>動画名</th>
-        <th>解決</th>
-        <th>未解決</th>
         <th>総数</th>
+        <th>解決</th>
+        <th>Wanted</th>
+        <th>未解決</th>
         <th></th>
       </tr>
     </thead>
@@ -21,11 +23,13 @@
     <tbody>
       <%= content_tag_for(:tr, @videos) do |video| %>
         <td><%= video.name %></td>
-        <td>10</td>
-        <td>20</td>
-        <td>30</td>
+        <td><%= video.total %></td>
+        <td><%= video.resolveds %></td>
+        <td><%= video.yets %></td>
+        <td><%= video.wants %></td>
         <td><%= link_to '削除', video, method: :delete, data: { confirm: '削除してよろしいですか?' } %></td>
       <% end %>
     </tbody>
   </table>
 </div>
+ <%= paginate(@videos) %>
