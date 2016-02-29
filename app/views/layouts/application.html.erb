@@ -1,3 +1,7 @@
+<% unless current_user %>
+  <%= link_to 'ログイン', '/auth/twitter' %>
+<% else %>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +41,7 @@
           <li class= "<%= 'active' if controller.controller_name == 'authors' %>"><%= link_to sanitize('<i class="glyphicon glyphicon-user"></i> ') + "作者情報", { controller: "authors" } %></li>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="#"><i class="glyphicon glyphicon-log-out"></i> ログアウト</a></li>
+            <li><a href="/logout"><i class="glyphicon glyphicon-log-out"></i> ログアウト</a></li>
         </ul>
       </div>
     </div>
@@ -59,16 +63,18 @@
           </div>
       </div>
   </div>
-    <footer id="footer" class="footer">
-        <p>&copy; 2016 MMD credit powered by <a href="http://tiger-star.net/">Tiger Star</a></p>
+  <div id="footer">
+    <footer class="footer">
         <span>コインの寄付頂けるとやる気がでます
             <ul class="list-unstyled">
                 <li>Mona : Gy6EBSmBosPy232VTrjMdhtY5EtY4iT6t</li>
                 <li>Ringo : RBPAdvAQEbtm42UFgJAti5FCWcVVW9UdzE</li>
                 <li>BitZeny : ZydqC79UFQ3mBUtQpjttXur9ihkmUdLzWN</li>
             </ul>
+            <p class="small">&copy; 2016 MMD credit powered by <a href="http://tiger-star.net/">Tiger Star</a></p>
         </span>
-        </p>
     </footer>
+  </div>
 </body>
 </html>
+<% end %>

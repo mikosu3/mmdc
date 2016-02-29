@@ -19,7 +19,7 @@
 //= require_tree .
 //= require bootstrap-sprockets
 //= require bootstrap-fileinput
-
+//= require footerFixed
 
 function clearFormAll() {
     for (var i=0; i<document.forms.length; ++i) {

@@ -25,9 +25,13 @@ $navbar-height: 50px;
   border-bottom: 1px solid #eeeeee;
 }
 
+
 .footer {
-    background: #f7f7fd;
-    border-top: 1px solid #d6dee5;
-    text-align: center;
-    padding: 30px 20px;
+  bottom: 0;
+  width: 100%;
+  background: #f7f7fd;
+  border-top: 1px solid #d6dee5;
+  text-align: center;
+  padding: 30px 20px;
 }
+
