@@ -124,6 +124,7 @@ class EmmRegistService < ApplicationController
       File.write(get_save_file_path + savefile_name, s)
     end
 
+    # アップされたemmファイルの保存先
     def self.get_save_file_path
       return "d:/tmp/"
     end
