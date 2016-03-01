@@ -157,7 +157,7 @@ class Video < ActiveRecord::Base
     query = <<-SQL
       SELECT
               COALESCE(credits.name, mmd_objects.file_name) AS model_name
-              ,authors.name
+              ,authors.disp_name
               ,credits.distribution
               ,mmd_objects.extension
               ,IF (
@@ -188,7 +188,7 @@ class Video < ActiveRecord::Base
               AND is_show = true
           GROUP BY
               model_name
-              ,name
+              ,disp_name
               ,distribution
           ORDER BY
             extension asc,
