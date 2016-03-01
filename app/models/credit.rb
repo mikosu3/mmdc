@@ -1,5 +1,5 @@
 class Credit < ActiveRecord::Base
-  attr_accessor :author_name
+  attr_accessor :author_names
   attr_accessor :distribution_url
 
   belongs_to :wanted
@@ -14,14 +14,13 @@ class Credit < ActiveRecord::Base
 
   validates :name, presence: true
   validates :name, length: { maximum: 100 }
-  validates :author_name, presence: true
-  validates :author_name, length: { maximum: 100 }
   validates :wanted_id, uniqueness: true
   validates :distribution, length: { maximum: 250 }, format: { with: /(^$)|(^(sm|im|td)[0-9]+$)/ix, allow_blank: true }
   validates :url, format: { with: /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix, allow_blank: true }, length: { maximum: 250 }
 
   attr_accessor :updated_screen_name
 
+  validate :validate_author_names
 
   after_update do
     @is_create = false
@@ -55,19 +54,25 @@ class Credit < ActiveRecord::Base
   private
     def set_author_id
 
-      #作者名からID取得
-      author = Author.find_by(:name => self.author_name)
+      self.authors = []
+      self.author_names.each do | author_name |
 
-      #なければ新規登録
-      if author.nil? then
-        author = Author.new
-        author.name = author_name
-        author.updated_by = self.updated_by
-        author.save
+        unless author_name.empty?
+          #作者名からID取得
+          author = Author.find_by(:name => author_name)
+
+          #なければ新規登録
+          if author.nil? then
+            author = Author.new
+            author.name = author_name
+            author.updated_by = self.updated_by
+            author.save
+          end
+
+          self.authors.push  author
+
+        end
       end
-
-      self.authors.push  author
-#      self.author_id = author.id
     end
 
     def save_credit_log
@@ -102,4 +107,32 @@ class Credit < ActiveRecord::Base
       history.save
     end
 
+    def validate_author_names
+      max_length = 100
+
+      # 空白削除
+      author_names.compact!
+      author_names.reject!{|e| e.empty?}
+
+      # 必須
+      if author_names.join.blank?
+        errors.add(:author_names, "作者名は1個以上入力してください。")
+      else
+
+        #配列内重複チェック
+        if author_names.size != author_names.uniq.size
+          errors.add(:author_names, "重複している作者名があります。")
+        end
+
+
+        # 最大文字数
+        author_names.each do |row|
+          if row.length > max_length
+            errors.add(:author_names, "作者名は#{max_length}文字以下で入力してください。")
+            break
+          end
+        end
+
+      end
+    end
 end

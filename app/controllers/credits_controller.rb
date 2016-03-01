@@ -18,13 +18,19 @@ class CreditsController < ApplicationController
   # GET /credits/new
   def new
     @credit = Credit.new
+    @credit.author_names = ['']
     @wanted = Wanted.find(params[:wanted_id])
   end
 
   # GET /credits/1/edit
   def edit
     @wanted = Wanted.find(@credit.wanted)
-    @credit.author_name = @credit.author.name
+
+    @credit.author_names = []
+    @credit.authors.each do | row |
+      @credit.author_names.push row.name
+    end
+
   end
 
   # POST /credits
@@ -32,6 +38,7 @@ class CreditsController < ApplicationController
   def create
     @credit = Credit.new(credit_params)
     @credit.updated_by = get_user_id
+    @credit.author_names= params['author_names']
 
     respond_to do |format|
       if @credit.save
@@ -49,6 +56,7 @@ class CreditsController < ApplicationController
   # PATCH/PUT /credits/1.json
   def update
 
+    @credit.author_names= params['author_names']
     @credit.updated_by = get_user_id
 
     respond_to do |format|
