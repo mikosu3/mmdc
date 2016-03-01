@@ -4,7 +4,10 @@ class Credit < ActiveRecord::Base
 
   belongs_to :wanted
   belongs_to :author
+
   has_many :credit_log, dependent: :destroy
+
+  has_and_belongs_to_many :authors
 
   before_save :set_author_id
   after_save :save_credit_log
@@ -63,14 +66,15 @@ class Credit < ActiveRecord::Base
         author.save
       end
 
-      self.author_id = author.id
+      self.authors.push  author
+#      self.author_id = author.id
     end
 
     def save_credit_log
       credit_log = CreditLog.new
 
       credit_log.credit_id = self.id
-      credit_log.author_id = self.author_id
+      credit_log.authors = self.authors
       credit_log.user_id = self.updated_by
       credit_log.name = self.name
       credit_log.distribution = self.distribution

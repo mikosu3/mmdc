@@ -1,7 +1,6 @@
 <div class="page-header">
   <h1>クレジット情報 <small>作者情報が提供済のデータ</small></h1>
 </div>
-
 <%= search_form_for @q , html: { class: "form-horizontal", role: "form"} do |f|  %>
 
 <div class="panel panel-default">
@@ -15,9 +14,9 @@
             <div class="col-sm-3">
               <%= f.text_field :name_cont, class: "form-control" %>
             </div>
-            <%= f.label :author_name_cont, "作者名", class: "col-sm-2 control-label" %>
+            <%= f.label :authors_name_cont, "作者名", class: "col-sm-2 control-label" %>
             <div class="col-sm-3">
-              <%= f.text_field :author_name_cont, class: "form-control" %>
+              <%= f.text_field :authors_name_cont, class: "form-control" %>
             </div>
         </div>
         <div class="form-group">
@@ -43,7 +42,7 @@
     <thead>
       <tr>
             <th><%= sort_link(@q, :name) %></th>
-            <th><%= sort_link(@q, :author_name, '作者名') %></th>
+            <th><%= sort_link(@q, :authors_name, '作者名') %></th>
             <th>配布先</th>
             <th><%= sort_link(@q, :wanted_folder_name, 'フォルダ名') %></th>
             <th><%= sort_link(@q, :wanted_file_name, 'ファイル名') %></th>
@@ -53,7 +52,7 @@
     <tbody>
       <%= content_tag_for(:tr, @credits) do |credit| %>
             <td><%= link_to credit.name, edit_credit_path(credit) %></td>
-            <td><%= credit.author.name %></td>
+            <td><% credit.authors.each do | author | %> <%=author.name %><br> <% end %></td>
             <td><%= link_to_unless(credit.distribution_url.blank?, credit.distribution, credit.distribution_url) %></td>
             <td><%= credit.wanted.folder_name %></td>
             <td><%= credit.wanted.file_name %></td>

@@ -12,7 +12,8 @@ class Author < ActiveRecord::Base
   validates :url, format: { with: /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix, allow_blank: true }, length: { maximum: 250 }
   validates :email, length: { maximum: 250 }, format: { with: /\A[\w+\-.]+@[a-z\d\-.]+\.[a-z]+\z/i, allow_blank: true }
 
-  has_many :credit
+  has_and_belongs_to_many :credits
+  has_and_belongs_to_many :credit_logs
 
   attr_accessor :updated_screen_name
 

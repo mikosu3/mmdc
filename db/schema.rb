@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160229150944) do
+ActiveRecord::Schema.define(version: 20160301123745) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "name",         limit: 100, null: false
@@ -28,6 +28,16 @@ ActiveRecord::Schema.define(version: 20160229150944) do
   end
 
   add_index "authors", ["name"], name: "index_authors_on_name", unique: true, using: :btree
+
+  create_table "authors_credit_logs", force: :cascade do |t|
+    t.integer "credit_log_id", limit: 4
+    t.integer "author_id",     limit: 4
+  end
+
+  create_table "authors_credits", force: :cascade do |t|
+    t.integer "credit_id", limit: 4
+    t.integer "author_id", limit: 4
+  end
 
   create_table "credit_logs", force: :cascade do |t|
     t.integer  "user_id",      limit: 4
@@ -50,13 +60,11 @@ ActiveRecord::Schema.define(version: 20160229150944) do
     t.integer  "wanted_id",    limit: 4,   null: false
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
-    t.integer  "author_id",    limit: 4,   null: false
     t.string   "name",         limit: 255, null: false
     t.string   "url",          limit: 255
     t.integer  "updated_by",   limit: 4,   null: false
   end
 
-  add_index "credits", ["author_id"], name: "index_credits_on_author_id", using: :btree
   add_index "credits", ["wanted_id"], name: "index_credits_on_wanted_id", unique: true, using: :btree
 
   create_table "emms", force: :cascade do |t|
@@ -146,7 +154,6 @@ ActiveRecord::Schema.define(version: 20160229150944) do
   add_foreign_key "credit_logs", "authors"
   add_foreign_key "credit_logs", "credits"
   add_foreign_key "credit_logs", "users"
-  add_foreign_key "credits", "authors"
   add_foreign_key "credits", "wanteds"
   add_foreign_key "mmd_objects", "emms"
   add_foreign_key "videos", "users"
