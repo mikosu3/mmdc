@@ -64,6 +64,8 @@ gem 'rambulance'
 
 gem 'seed_dump'
 
+gem 'unicorn', :platforms => [:mswin]
+
 source 'http://rails-assets.org' do
   gem 'rails-assets-bootstrap-fileinput', '~> 2.5.0'
 end
