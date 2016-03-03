@@ -1,4 +1,4 @@
-class EmmRegistService < ApplicationController
+class EmmRegistService
     #保存
     def self.save(files, video)
       files.each_with_index do | file, index |
@@ -126,6 +126,6 @@ class EmmRegistService < ApplicationController
 
     # アップされたemmファイルの保存先
     def self.get_save_file_path
-      return "d:/tmp/"
+      return Rails.application.secrets.save_dir_path
     end
 end
