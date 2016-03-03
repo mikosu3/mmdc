@@ -60,6 +60,8 @@ gem 'omniauth-twitter'
 
 gem 'rubyzip'
 
+gem 'rambulance'
+
 source 'http://rails-assets.org' do
   gem 'rails-assets-bootstrap-fileinput', '~> 2.5.0'
 end
