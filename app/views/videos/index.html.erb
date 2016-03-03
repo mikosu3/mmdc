@@ -27,7 +27,9 @@
         <td><%= video.resolveds %></td>
         <td><%= video.wants %></td>
         <td><%= video.yets %></td>
-        <td><%= link_to '削除', video, method: :delete, data: { confirm: '削除してよろしいですか?' } %> <%= link_to 'DL', zip_video_path(video) %></td>
+        <td><%= link_to  zip_video_path(video), class: "btn btn-default btn-sm" do %><i class="glyphicon glyphicon-download-alt"></i> ダウンロード<% end %>
+            <%= link_to  video, method: :delete, data: { confirm: '削除してよろしいですか?' } , class: "btn btn-default btn-sm" do %><i class="glyphicon glyphicon-trash"></i> 削除<% end %>
+        </td>
       <% end %>
     </tbody>
   </table>
