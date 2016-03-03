@@ -62,6 +62,8 @@ gem 'rubyzip'
 
 gem 'rambulance'
 
+gem 'seed_dump'
+
 source 'http://rails-assets.org' do
   gem 'rails-assets-bootstrap-fileinput', '~> 2.5.0'
 end
