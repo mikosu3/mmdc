@@ -1,5 +1,5 @@
 class VideosController < ApplicationController
-  before_action :set_video, only: [:show, :edit, :update, :destroy]
+  before_action :set_video, only: [:show, :edit, :update, :destroy, :zip]
 
   # GET /videos
   # GET /videos.json
@@ -77,10 +77,18 @@ class VideosController < ApplicationController
     end
   end
 
+  # zipファイルDL
+  def zip
+    dl_file = Video.create_dl_zip @video.id
+    stat = File::stat(dl_file)
+    send_file(dl_file, :filename => ERB::Util.url_encode(@video.name)+ '_' + Time.now.strftime('%Y%m%d%H%M%S') + '.zip', :length => stat.size)
+
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_video
-      @video = Video.find(params[:id])
+      @video = Video.find_by(id: params[:id], user_id: get_user_id)
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

@@ -4,7 +4,11 @@ Rails.application.routes.draw do
   resources :authors, :except => [:show, :delete]
   resources :wanteds, :except => [:show, :delete]
   resources :emms, :except => [:show, :delete]
-  resources :videos, :except => [:show]
+  resources :videos, :except => [:show] do
+    member do
+      get 'zip'
+    end
+  end
   resources :infos
   resources :credits, :except => [:show, :delete] do
     collection do
