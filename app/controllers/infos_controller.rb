@@ -1,5 +1,6 @@
 class InfosController < ApplicationController
   before_action :set_info, only: [:show, :edit, :update, :destroy]
+  before_filter :check_admin, only:[:edit, :update, :new, :create]
 
   # GET /infos
   # GET /infos.json
@@ -70,5 +71,12 @@ class InfosController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def info_params
       params.require(:info).permit(:date, :title, :note, :lock_version)
+    end
+
+    # ログインユーザーが管理者か
+    def check_admin
+      unless current_user['is_admin'] then
+        redirect_to root_path
+      end
     end
 end

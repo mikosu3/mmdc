@@ -3,10 +3,12 @@
     <span class="glyphicon glyphicon-list-alt"></span>
     Back
   <% end %>
+<% if current_user['is_admin'] %>
   <%= link_to edit_info_path(@info), class: 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-pencil"></span>
-    Edit
+    編集
   <% end %>
+<% end %>
   <h1><%= @info.title %> <small><%= @info.date.strftime('%Y/%m/%d') %></small></h1>
 </div>
 <%= simple_format(@info.note) %>

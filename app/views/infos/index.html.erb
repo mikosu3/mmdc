@@ -1,8 +1,10 @@
 <div class="page-header">
+<% if current_user['is_admin'] %>
   <%= link_to new_info_path, class: 'btn btn-primary' do %>
     <span class="glyphicon glyphicon-plus"></span>
     新規作成
   <% end %>
+<% end %>
   <h1>お知らせ一覧</h1>
 </div>
 
