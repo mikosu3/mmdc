@@ -33,8 +33,6 @@ Wanted.create!([
   {file_name: "学ラン君v1.0.pmx", folder_name: "学ラン君v1.0a", extension: "pmx", lock_version: 0},
   {file_name: "本居小鈴.pmx", folder_name: "本居小鈴", extension: "pmx", lock_version: 0},
   {file_name: "稗田阿求.pmx", folder_name: "aQN", extension: "pmx", lock_version: 0},
-  {file_name: "キャミ短パン.pmx", folder_name: "pmx", extension: "pmx", lock_version: 0},
-  {file_name: "しまT.pmx", folder_name: "pmx", extension: "pmx", lock_version: 0},
   {file_name: "モブC子.pmx", folder_name: "モブC子", extension: "pmx", lock_version: 0},
   {file_name: "茜_制服.pmx", folder_name: "日野茜v2", extension: "pmx", lock_version: 0},
   {file_name: "陸凱水無月v2.04.pmx", folder_name: "水無月v2.04", extension: "pmx", lock_version: 0},
