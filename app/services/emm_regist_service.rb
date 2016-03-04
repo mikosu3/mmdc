@@ -60,7 +60,7 @@ class EmmRegistService
       mmd.folder_name = File.dirname(infostr).split("/").last
 
       #同動画 同emmで同じものが登録されているか
-      v = Video.joins({:emm =>:mmd_object}).find_by(id:emm.video.id, emms:{id: emm.id},  mmd_objects:{folder_name: mmd.folder_name}, mmd_objects:{file_name: mmd.file_name})
+      v = Video.joins({:emm =>:mmd_object}).find_by(id:emm.video.id, emms:{id: emm.id},  mmd_objects:{folder_name: mmd.folder_name, file_name: mmd.file_name})
       unless v
         mmd.save
 
