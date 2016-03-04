@@ -1,32 +1,31 @@
 <div class="page-header">
-  <%= link_to new_emm_path, class: 'btn btn-primary' do %>
-    <span class="glyphicon glyphicon-plus"></span>
-    アップロード
+  <%= link_to videos_path, class: 'btn btn-default' do %>
+    <span class="glyphicon glyphicon-list-alt"></span>
+    Back
   <% end %>
-  <h1>EMM情報</h1>
+  <h1><%= @emms[0].video.name %> <small>Emm毎の個別情報です</small></h1>
+  <small>動画情報は重複を除いて計上されるので動画情報の総数とは差異があります。</small>
 </div>
 
 <div class="table-responsive">
   <table class="table table-striped table-bordered table-hover">
     <thead>
       <tr>
-            <th>動画名</th>
-            <th>保存ファイル名</th>
-            <th>ユーザー</th>
-            <th></th>
-        <th></th>
-        <th></th>
+        <th>Emm名</th>
+        <th>総数</th>
+        <th>解決</th>
+        <th>Wanted</th>
+        <th>未解決</th>
       </tr>
     </thead>
 
     <tbody>
       <%= content_tag_for(:tr, @emms) do |emm| %>
-            <td><%= link_to emm.original_name, emm %></td>
-            <td><%= emm.save_file_name %></td>
-            <td><%= emm.user %></td>
-            <td><%= link_to 'Show', emm %></td>
-        <td><%= link_to 'Edit', edit_emm_path(emm) %></td>
-        <td><%= link_to 'Destroy', emm, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            <td><%= link_to emm.original_name, emm_path(emm) %></td>
+            <td class="text-right"><%= emm.video.total %></td>
+            <td class="text-right"><%= emm.video.resolveds %></td>
+            <td class="text-right"><%= emm.video.wants %></td>
+            <td class="text-right"><%= emm.video.yets %></td>
       <% end %>
     </tbody>
   </table>

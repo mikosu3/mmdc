@@ -4,7 +4,12 @@ class EmmsController < ApplicationController
   # GET /emms
   # GET /emms.json
   def index
-    @emms = Emm.all
+    @emms = Emm.joins(:video).where(video_id: params[:video_id], videos: {is_show: true, user_id: get_user_id})
+
+    #emm毎の集計
+    @emms.each do |row|
+      Video.set_total(row.video, row.id)
+    end
   end
 
   # GET /emms/1

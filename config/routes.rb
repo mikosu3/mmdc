@@ -3,7 +3,11 @@ Rails.application.routes.draw do
 
   resources :authors, :except => [:show, :delete]
   resources :wanteds, :except => [:show, :delete]
-  resources :emms, :except => [:show, :delete]
+  resources :emms, :except => [:edit, :delete] do
+    collection do
+      get 'video/:video_id' => "emms#index", as: "video"
+    end
+  end
   resources :videos, :except => [:show] do
     member do
       get 'zip'

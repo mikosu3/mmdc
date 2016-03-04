@@ -22,11 +22,11 @@
 
     <tbody>
       <%= content_tag_for(:tr, @videos) do |video| %>
-        <td><%= video.name %></td>
-        <td><%= video.total %></td>
-        <td><%= video.resolveds %></td>
-        <td><%= video.wants %></td>
-        <td><%= video.yets %></td>
+        <td><%= link_to video.name, video_emms_path(video) %></td>
+        <td class="text-right"><%= video.total %></td>
+        <td class="text-right"><%= video.resolveds %></td>
+        <td class="text-right"><%= video.wants %></td>
+        <td class="text-right"><%= video.yets %></td>
         <td><%= link_to  zip_video_path(video), class: "btn btn-default btn-sm" do %><i class="glyphicon glyphicon-download-alt"></i> ダウンロード<% end %>
             <%= link_to  video, method: :delete, data: { confirm: '削除してよろしいですか?' } , class: "btn btn-default btn-sm" do %><i class="glyphicon glyphicon-trash"></i> 削除<% end %>
         </td>
