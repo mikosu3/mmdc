@@ -12,7 +12,7 @@ class Video < ActiveRecord::Base
   paginates_per 15
 
   # 1動画で使用したオブジェクト数
-  def self.set_total(video)
+  def self.set_total(video, emm_id = nil)
     query = <<-SQL
       SELECT
               *
@@ -33,7 +33,7 @@ class Video < ActiveRecord::Base
                                           JOIN mmd_objects
                                               ON (emms.id = mmd_objects.emm_id)
                                   WHERE
-                                      videos.id = :id
+                                      videos.id = :id #{ unless emm_id.nil? then 'and emms.id = :emm_id' end }
                                       AND is_show = true
                                   GROUP BY
                                       file_name
@@ -64,7 +64,7 @@ class Video < ActiveRecord::Base
                                                       AND wanteds.extension = mmd_objects.extension
                                                   )
                                       WHERE
-                                          videos.id = :id
+                                          videos.id = :id #{ unless emm_id.nil? then 'and emms.id = :emm_id' end }
                                           AND is_show = true
                                           AND wanteds.id IS null
                                       GROUP BY
@@ -96,7 +96,7 @@ class Video < ActiveRecord::Base
                                                   AND wanteds.extension = mmd_objects.extension
                                               )
                                   WHERE
-                                      videos.id = :id
+                                      videos.id = :id #{ unless emm_id.nil? then 'and emms.id = :emm_id' end }
                                       AND is_show = true
                                   GROUP BY
                                       file_name
@@ -128,7 +128,7 @@ class Video < ActiveRecord::Base
                                           JOIN credits
                                               ON (wanteds.id = credits.wanted_id)
                                   WHERE
-                                      videos.id = :id
+                                      videos.id = :id #{ unless emm_id.nil? then 'and emms.id = :emm_id' end }
                                       AND is_show = true
                                   GROUP BY
                                       file_name
@@ -141,7 +141,7 @@ class Video < ActiveRecord::Base
     #プレースホルダ
     sql = ActiveRecord::Base.send(
       :sanitize_sql_array,
-      [query,id: video.id]
+      [query,id: video.id, emm_id: emm_id]
     )
 
     cnt = ActiveRecord::Base.connection.select_one(sql)
