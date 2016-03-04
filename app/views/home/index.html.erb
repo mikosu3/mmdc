@@ -4,4 +4,23 @@
 <% unless current_user %>
   <%= link_to image_tag("sign-in-with-twitter-gray.png"), '/auth/twitter' %> <small>当サイトを利用するにはログインが必要です。</small>
 <% end %>
-デザイン求む・・・
+<span>デザイン求む・・・</span>
+
+<h2>お知らせ</h2>
+<table class="table table-responsive table-hover">
+    <tbody>
+        <% @side_infos.each do | info | %>
+        <tr>
+            <td width="120"><%= info.date.strftime('%Y/%m/%d') %></td>
+            <td><%= link_to info.title, info %></td>
+        </tr>
+        <% end %>
+    </tbody>
+<% if @side_infos.length == 5 then %>
+    <tfoot>
+        <tr>
+            <td colspan="2"><span class="small"><a href="/infos">全て見る</a></span></td>
+        </tr>
+    </tfoot>
+<% end %>
+</table>

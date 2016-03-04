@@ -29,10 +29,14 @@ class ApplicationController < ActionController::Base
   end
 
   private
-    #更新情報取得
+    #サイドメニュー情報取得
     def get_side_info
       @histories = History.order(id: :desc).first(30)
-      @side_infos = Info.order(id: :desc).first(3)
+
+      @wanted_size = Wanted.includes(:credit).where(credits: {id: nil}).size
+      @credit_size = Credit.all.size
+      @author_size = Author.all.size
+
     end
 
   def current_user
