@@ -211,6 +211,9 @@ ja:
     distribution: 配布先ID
     author_name: 作者名
     author_names: 作者名
+    date: 日付
+    title: タイトル
+    note: 内容
   views:
     pagination:
       first: "&laquo;"
