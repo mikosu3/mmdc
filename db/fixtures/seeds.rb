@@ -6,6 +6,8 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+User.create(:is_admin => true, :screen_name => "mikosu3",  :uid => "322435416", :provider => "twitter", :name => "みこす")
+
 Must.create(:video => "sm2420025", :name => "MikuMikuDance", :author_name => "樋口優")
 Must.create(:video => "sm12149815", :name => "MikuMikuEffect", :author_name => "舞力介入P")
 Must.create(:video => "sm?", :name => "MMDクレジット", :author_name => "みこす")
