@@ -154,7 +154,7 @@ class Video < ActiveRecord::Base
 
   # DL用zipファイルを作成する
   def self.create_dl_zip(id)
-    zipfile_name = "#{Rails.root}/tmp/#{id}_#{Time.now.strftime('%Y%m%d%H%M%S')}.zip"
+    zipfile_name = "#{Rails.root}/tmp/#{id}_#{Time.now.strftime('%Y%m%d%H%M%S%N')}.zip"
 
     # 必須データ取得
     musts = Must.all
@@ -164,8 +164,13 @@ class Video < ActiveRecord::Base
 
     # csvとツリー用テキスト作成
     Zip::File.open(zipfile_name, Zip::File::CREATE) do |zipfile|
-      zipfile.add("credit.csv", csv)
-      zipfile.add("tree.txt", tree_txt)
+      if(zipfile.find_entry("credit.csv") == nil)
+        zipfile.add("credit.csv", csv)
+      end
+
+      if(zipfile.find_entry("tree.txt") == nil)
+        zipfile.add("tree.txt", tree_txt)
+      end
     end
 
     #一時ファイル削除
@@ -176,7 +181,7 @@ class Video < ActiveRecord::Base
 
   # コンテンツツリー登録用テキストファイル
   def self.create_tree_txt(id, musts)
-    file_path = "#{Rails.root}/tmp/#{id}_#{Time.now.strftime('%Y%m%d%H%M%S')}.txt"
+    file_path = "#{Rails.root}/tmp/#{id}_#{Time.now.strftime('%Y%m%d%H%M%S%N')}.txt"
     dists = []
 
     # 必須項目
@@ -202,7 +207,7 @@ class Video < ActiveRecord::Base
 
   # DLクレジット情報csv作成
   def self.create_csv(id, musts)
-    file_path = "#{Rails.root}/tmp/#{id}_#{Time.now.strftime('%Y%m%d%H%M%S')}.csv"
+    file_path = "#{Rails.root}/tmp/#{id}_#{Time.now.strftime('%Y%m%d%H%M%S%N')}.csv"
     csv_data = get_dl_video_info id
 
     CSV.open(file_path, "a:Windows-31J", :headers => csv_column_names, :write_headers => true) do |file|
