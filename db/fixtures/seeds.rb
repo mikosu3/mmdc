@@ -85,3 +85,10 @@ Wanted.create!([
   {file_name: "親父1号ss702.pmd", folder_name: "モブ親父セット1", extension: "pmd", lock_version: 0},
   {file_name: "にゃんちゅうver0.9.fx", folder_name: "にゃんちゅう", extension: "fx", lock_version: 0}
 ])
+
+Author.create!([
+  {name: "ビームマンP", url: "http://www43.atwiki.jp/beamman/", twitter: "BeamManP", pixiv: "", email: "", lock_version: 0, nico: "421727", disp_name: "ビームマンP", updated_by: 1},
+  {name: "そぼろ", url: "", twitter: "sovoro_mmd", pixiv: "", email: "", lock_version: 0, nico: "424150", disp_name: "そぼろ", updated_by: 1},
+  {name: "針金P", url: "http://harigane.at.webry.info/", twitter: "HariganeP", pixiv: "", email: "", lock_version: 0, nico: "10092695", disp_name: "針金P", updated_by: 1},
+  {name: "ikeno", url: "", twitter: "", pixiv: "", email: "", lock_version: 0, nico: "6848632", disp_name: "ikeno", updated_by: 1}
+])
