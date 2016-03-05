@@ -15,6 +15,7 @@ class EmmsController < ApplicationController
   # GET /emms/1
   # GET /emms/1.json
   def show
+    @emm_details = Emm.get_emm_details(@emm.id, get_user_id)
   end
 
   # GET /emms/new
