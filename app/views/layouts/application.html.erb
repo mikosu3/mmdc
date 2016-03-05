@@ -30,6 +30,7 @@
         <%= link_to "MMDクレジット", "/", class: "navbar-brand" %>
       </div>
       <div id="navbar" class="collapse navbar-collapse">
+    <% if current_user %>
         <ul class="nav navbar-nav">
           <li class= "<%= 'active' if controller.controller_name == 'videos' %>"><%= link_to sanitize('<i class="glyphicon glyphicon-film"></i> ') + "動画情報", { controller: "videos" } %></li>
           <li class= "<%= 'active' if controller.controller_name == 'wanteds' %>"><%= link_to sanitize('<i class="glyphicon glyphicon-comment"></i> ') + "Wanted", { controller: "wanteds" } %></li>
@@ -40,6 +41,11 @@
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/logout"><i class="glyphicon glyphicon-log-out"></i> ログアウト</a></li>
         </ul>
+    <% else %>
+        <ul class="nav navbar-nav navbar-right">
+            <li><a href="/auth/twitter"><i class="glyphicon glyphicon-log-in"></i> ログイン</a></li>
+        </ul>
+    <% end %>
       </div>
     </div>
   </nav>

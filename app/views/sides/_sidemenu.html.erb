@@ -21,6 +21,6 @@
 <dl>
     <% @histories.each do | history | %>
         <dt><%= history.created_at.strftime('%Y/%m/%d %H:%M:%S') %></dt>
-        <dd class="small"><p class="label label-<%= case history.item when 'クレジット' then 'success' when '作者' then 'primary' else 'info' end %>"><%= history.item %></p> <%= sanitize(history.is_create? ? '登録':'更新') %> <%= link_to history.item_name.truncate(20), history.link %></dd>
+        <dd class="small"><p class="label label-<%= case history.item when 'クレジット' then 'success' when '作者' then 'primary' else 'info' end %>"><%= history.item %></p> <%= sanitize(history.is_create? ? '登録':'更新') %> <%= if (current_user) then link_to history.item_name.truncate(20), history.link else  history.item_name.truncate(20)  end %></dd>
     <% end %>
 </dl>
