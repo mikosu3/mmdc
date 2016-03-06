@@ -1,0 +1,10 @@
+diff a/app/views/credits/index.html.erb b/app/views/credits/index.html.erb	(rejected hunks)
+@@ -43,7 +43,7 @@
+       <tr>
+             <th><%= sort_link(@q, :name) %></th>
+             <th>ä½œè€…å</th>
+-            <th>é…å¸ƒå…ˆ</th>
++            <th><%= sort_link(@q, :credit_distribution, 'é…å¸ƒå…ˆ') %></th>
+             <th><%= sort_link(@q, :wanted_folder_name, 'ãƒ•ã‚©ãƒ«ãƒ€å') %></th>
+             <th><%= sort_link(@q, :wanted_file_name, 'ãƒ•ã‚¡ã‚¤ãƒ«å') %></th>
+       </tr>

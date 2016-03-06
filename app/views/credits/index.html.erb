@@ -51,11 +51,11 @@
 
     <tbody>
       <%= content_tag_for(:tr, @credits) do |credit| %>
-            <td><%= link_to credit.name, edit_credit_path(credit) %></td>
-            <td><% credit.authors.each do | author | %> <%=author.name %><br> <% end %></td>
+            <td><%= link_to credit.name.truncate(15), edit_credit_path(credit) %></td>
+            <td><% credit.authors.each do | author | %> <%=author.name.truncate(15) %><br> <% end %></td>
             <td><%= link_to_unless(credit.distribution_url.blank?, credit.distribution, credit.distribution_url) %></td>
-            <td><%= credit.wanted.folder_name %></td>
-            <td><%= credit.wanted.file_name %></td>
+            <td><%= credit.wanted.folder_name.truncate(10) %></td>
+            <td><%= credit.wanted.file_name.truncate(10) %></td>
       <% end %>
     </tbody>
   </table>
