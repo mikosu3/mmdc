@@ -1,9 +1,3 @@
-<style>
-<!--
-
--->
-</style>
-
 <header class="jumbotron">
   <div class="container">
     <h1>MMDクレジット</h1>
@@ -32,6 +26,7 @@
     </tfoot>
 <% end %>
 </table>
+<hr>
 
 <h2>これは何？</h2>
 <p>MMD動画制作における制作者の負担を軽減する為、MMDクレジットでは下記の機能を提供します。</p>
@@ -57,5 +52,38 @@
             <h3 class="text-center">ダウンロード</h3>
             <p>使用モデル、アクセサリ情報の一覧表(csv)とコンテンツツリー登録用テキストファイルを生成し、ダウンロードすることができます。</p>
         </div>
+    </div>
+</div>
+<hr>
+
+<h2>まずは使ってみよう！</h2>
+<div class="row">
+    <div class="col-sm-8">
+        <div class="embed-responsive embed-responsive-16by9">
+            <iframe class="embed-responsive-item" src="https://youtu.be/Z8OI8K7uyF8" frameborder="0" allowfullscreen></iframe>
+        </div>
+    </div>
+    <div class="col-sm-4">
+        <div>
+            <h3 class="text-info">STEP1</h3>
+            <p class="">まずは<%= link_to 'ログイン', '/auth/twitter' %>しましょう。</p>
+            <h3 class="text-info">STEP2</h3>
+            <p class="">動画情報のページからEmmファイルをアップロードしましょう。</p>
+            <h3 class="text-info">STEP3</h3>
+            <p class="">動画情報の一覧からzipファイルをダウンロードできるようになります。</p>
+        </div>
+    </div>
+</div>
+
+<hr>
+<h2>ソースコードについて</h2>
+<div class="row">
+    <div class="col-sm-12">
+        <ul class="list-inline">
+            <li><%= link_to image_tag("/images/GitHub-Mark-64px.png", :class => "img-circle"), 'https://github.com/mikosu3/mmdc' %></li>
+            <li>GitHubにてソースコードを公開しています。<br>
+                よりよいシステムになるよう皆様からのプルリクエストお待ちしています。<br>
+            </li>
+        </ul>
     </div>
 </div>
