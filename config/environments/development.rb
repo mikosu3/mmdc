@@ -41,4 +41,7 @@ Rails.application.configure do
 
   # ローカルでもカスタムエラーページに飛ぶか
   config.consider_all_requests_local = true
+
+  # ログローテート
+  config.logger = Logger.new("log/development.log", 'daily')
 end
