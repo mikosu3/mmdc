@@ -95,8 +95,11 @@ class Video < ActiveRecord::Base
                                                   AND wanteds.folder_name = mmd_objects.folder_name
                                                   AND wanteds.extension = mmd_objects.extension
                                               )
+                                          LEFT OUTER JOIN credits
+                                              ON (wanteds.id = credits.wanted_id)
                                   WHERE
                                       videos.id = :id #{ unless emm_id.nil? then 'and emms.id = :emm_id' end }
+                                      AND credits.wanted_id IS null
                                       AND is_show = true
                                   GROUP BY
                                       file_name
