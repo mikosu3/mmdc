@@ -81,4 +81,6 @@ Rails.application.configure do
   # ログローテート
   config.logger = Logger.new("log/production.log", 'daily')
 
+  # GoogleAnalytics
+  GA.tracker = "UA-74860433-1"
 end
