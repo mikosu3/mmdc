@@ -214,6 +214,7 @@ ja:
     date: 日付
     title: タイトル
     note: 内容
+    file: Emmファイル
   views:
     pagination:
       first: "&laquo;"

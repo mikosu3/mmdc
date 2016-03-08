@@ -36,8 +36,13 @@ class VideosController < ApplicationController
 
     upload_file = params[:file]
 
+    # ファイル必須
+    if upload_file.nil?
+       @video.errors.add(:file, "は最低1つアップしてください。")
+    end
+
     respond_to do |format|
-      if @video.save
+      if !upload_file.nil? && @video.save
 
         EmmRegistService.save(upload_file, @video)
 
