@@ -10,8 +10,13 @@ class ApplicationController < ActionController::Base
   def login_required
     if session[:user_id]
       @current_user = User.find(session[:user_id])
+
+      if @current_user.is_ban
+        redirect_to root_path, alert: 'お使いのアカウントはブロックされています。'
+      end
+
     else
-      redirect_to root_path
+      redirect_to root_path, notice: 'ログインしてください。'
     end
 
   end
