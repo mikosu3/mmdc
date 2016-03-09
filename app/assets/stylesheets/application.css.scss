@@ -40,3 +40,7 @@ $navbar-height: 50px;
   background-size: cover;
   background-position: center 80%;
 }
+
+.fb_iframe_widget > span {
+    vertical-align: baseline !important;
+}
