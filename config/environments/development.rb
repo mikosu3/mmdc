@@ -44,4 +44,6 @@ Rails.application.configure do
 
   # ログローテート
   config.logger = Logger.new("log/development.log", 'daily')
+  config.logger.formatter = Logger::Formatter.new
+
 end
