@@ -237,44 +237,54 @@ class Video < ActiveRecord::Base
   # DL用モデルデータ取得
   def self.get_dl_video_info(id)
     query = <<-SQL
-      SELECT
-              COALESCE(credits.name, mmd_objects.file_name) AS model_name
-              ,authors.disp_name
-              ,credits.distribution
-              ,mmd_objects.extension
-              ,IF (
-                  credits.name IS null
-                  ,'×'
-                  ,'○'
-              ) AS status
-          FROM
-              videos
-                  JOIN emms
-                      ON (videos.id = emms.video_id)
-                  JOIN mmd_objects
-                      ON (emms.id = mmd_objects.emm_id)
-                  LEFT OUTER JOIN wanteds
-                      ON (
-                          wanteds.file_name = mmd_objects.file_name
-                          AND wanteds.folder_name = mmd_objects.folder_name
-                          AND wanteds.extension = mmd_objects.extension
-                      )
-                  LEFT OUTER JOIN credits
-                      ON (wanteds.id = credits.wanted_id)
-                  LEFT OUTER JOIN authors_credits
-                      ON (credits.id = authors_credits.credit_id)
-                  LEFT OUTER JOIN authors
-                      ON (authors.id = authors_credits.author_id)
-          WHERE
-              videos.id = :id
-              AND is_show = true
-          GROUP BY
-              model_name
-              ,disp_name
-              ,distribution
-          ORDER BY
-            extension asc,
-              model_name ASC;
+        SELECT
+                COALESCE(credits.name, mmd_objects.file_name) AS model_name
+                ,authors.disp_name
+                ,credits.distribution
+                ,mmd_objects.extension
+                ,IF (
+                    credits.name IS null
+                    ,'×'
+                    ,'○'
+                ) AS status
+            FROM
+                videos
+                    JOIN emms
+                        ON (videos.id = emms.video_id)
+                    JOIN mmd_objects
+                        ON (emms.id = mmd_objects.emm_id)
+                    LEFT OUTER JOIN wanteds
+                        ON (
+                            wanteds.file_name = mmd_objects.file_name
+                            AND wanteds.folder_name = mmd_objects.folder_name
+                            AND wanteds.extension = mmd_objects.extension
+                        )
+                    LEFT OUTER JOIN credits
+                        ON (wanteds.id = credits.wanted_id)
+                    LEFT OUTER JOIN (
+                        SELECT
+                                credit_id
+                                ,group_concat(
+                                    DISTINCT disp_name ORDER BY disp_name ASC separator '/'
+                                ) AS disp_name
+                            FROM
+                                authors_credits
+                                    LEFT OUTER JOIN authors
+                                        ON (authors.id = authors_credits.author_id)
+                            GROUP BY
+                                credit_id
+                    ) AS authors
+                        ON (credits.id = authors.credit_id)
+            WHERE
+                videos.id = :id
+                AND is_show = true
+            GROUP BY
+                model_name
+                ,disp_name
+                ,distribution
+            ORDER BY
+                extension ASC
+                ,model_name ASC;
     SQL
 
     #プレースホルダ
