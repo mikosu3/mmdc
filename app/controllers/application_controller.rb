@@ -42,6 +42,10 @@ class ApplicationController < ActionController::Base
       @credit_size = Credit.all.size
       @author_size = Author.all.size
 
+      @wanted_today_size = Wanted.includes(:credit).where(credits: {id: nil}, created_at: 0.day.ago.all_day).size
+      @credit_today_size = Credit.where(created_at: 0.day.ago.all_day).size
+      @author_today_size = Author.where(created_at: 0.day.ago.all_day).size
+
     end
 
   def current_user
