@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'home/index'
 
-  resources :authors, :except => [:show, :delete]
+  resources :authors, :except => [:show]
   resources :wanteds, :except => [:show, :delete]
   resources :emms, :except => [:edit, :delete] do
     collection do

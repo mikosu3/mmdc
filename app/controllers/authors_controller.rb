@@ -4,7 +4,7 @@ class AuthorsController < ApplicationController
   # GET /authors
   # GET /authors.json
   def index
-    @q        = Author.search(params[:q])
+    @q        = Author.includes(:credits).search(params[:q])
     @q.sorts = 'name asc' if @q.sorts.empty?
     @authors = @q.result.page(params[:page])
   end
@@ -51,6 +51,24 @@ class AuthorsController < ApplicationController
         format.html { render :edit }
         format.json { render json: @author.errors, status: :unprocessable_entity }
       end
+    end
+  end
+
+  # DELETE /authors/1
+  # DELETE /authors/1.json
+  def destroy
+
+
+    respond_to do |format|
+
+      # 使われている作者情報は削除しない
+      if @author.credits.size != 0 then
+        format.html { redirect_to authors_url, alert: '既に使用されている作者情報の為、削除できません。' }
+      else
+        @author.delete
+        format.html { redirect_to authors_url, notice: '作者情報を削除しました。' }
+      end
+      format.json { head :no_content }
     end
   end
 
