@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
       @current_user = User.find(session[:user_id])
 
       if @current_user.is_ban
-        redirect_to root_path, alert: 'お使いのアカウントはブロックされています。'
+        redirect_to logout_path, alert: 'お使いのアカウントはブロックされています。'
       end
 
     else
