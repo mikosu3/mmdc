@@ -21,6 +21,8 @@ Rails.application.routes.draw do
     end
   end
 
+  resources :users, :except => [:create, :show]
+
   root 'home#index'
   get "home/index"
 

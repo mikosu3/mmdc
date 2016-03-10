@@ -33,6 +33,13 @@ class ApplicationController < ActionController::Base
     return User.find(get_user_id).screen_name
   end
 
+  # ログインユーザーが管理者か
+  def check_admin
+    unless current_user['is_admin'] then
+      redirect_to root_path
+    end
+  end
+
   private
     #サイドメニュー情報取得
     def get_side_info

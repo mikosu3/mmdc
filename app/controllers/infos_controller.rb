@@ -72,11 +72,4 @@ class InfosController < ApplicationController
     def info_params
       params.require(:info).permit(:date, :title, :note, :lock_version)
     end
-
-    # ログインユーザーが管理者か
-    def check_admin
-      unless current_user['is_admin'] then
-        redirect_to root_path
-      end
-    end
 end
