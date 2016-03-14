@@ -15,7 +15,7 @@ class Credit < ActiveRecord::Base
   validates :name, presence: true
   validates :name, length: { maximum: 100 }
   validates :wanted_id, uniqueness: true
-  validates :distribution, length: { maximum: 250 }, format: { with: /(^$)|(^(sm|im|td)[0-9]+$)/ix, allow_blank: true }
+  validates :distribution, length: { maximum: 250 }, format: { with: /(^$)|(^(sm|im|td|nm)[0-9]+$)/ix, allow_blank: true }
   validates :url, format: { with: /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix, allow_blank: true }, length: { maximum: 250 }
 
   attr_accessor :updated_screen_name
@@ -38,7 +38,7 @@ class Credit < ActiveRecord::Base
   # 配布先(ニコニコのURL)を取得
   def distribution_url
     case self.distribution
-    when /^sm[0-9]+/ then
+    when /^(s|n)m[0-9]+/ then
       return 'http://www.nicovideo.jp/watch/' + distribution
     when /^im[0-9]+/ then
       return 'http://seiga.nicovideo.jp/seiga/' + distribution
