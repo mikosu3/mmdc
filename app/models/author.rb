@@ -19,6 +19,8 @@ class Author < ActiveRecord::Base
 
   before_save :set_disp_name
 
+  auto_strip_attributes :name, :disp_name, :nico, :pixiv, :url, :twitter, :email,  :nullify => false
+
   after_update do
     @is_create = false
   end
