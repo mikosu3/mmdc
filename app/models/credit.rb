@@ -9,7 +9,7 @@ class Credit < ActiveRecord::Base
 
   has_and_belongs_to_many :authors
 
-  before_save :set_author_id
+  before_save :set_author_id,:check_changed
   after_save :save_credit_log
 
   validates :name, presence: true
@@ -17,10 +17,17 @@ class Credit < ActiveRecord::Base
   validates :wanted_id, uniqueness: true
   validates :distribution, length: { maximum: 250 }, format: { with: /(^$)|(^(sm|im|td|nm)[0-9]+$)/ix, allow_blank: true }
   validates :url, format: { with: /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix, allow_blank: true }, length: { maximum: 250 }
+  validates :description, length: { maximum: 255 }
 
   attr_accessor :updated_screen_name
 
   validate :validate_author_names
+
+  auto_strip_attributes :name, :distribution, :url, :description, :nullify => false
+
+  after_create do
+    @is_create = true
+  end
 
   after_update do
     @is_create = false
@@ -75,7 +82,19 @@ class Credit < ActiveRecord::Base
       end
     end
 
+    def check_changed
+      # 更新者以外で変更がない場合は更新者も変更しない
+      unless (self.name_changed? || self.distribution_changed? || self.url_changed? || self.description_changed?)
+        self.updated_by = self.reload.updated_by
+      end
+    end
+
     def save_credit_log
+
+      # 更新されていない場合は履歴登録しない
+      if (!@is_create && !self.lock_version_changed?)
+        return
+      end
       credit_log = CreditLog.new
 
       credit_log.credit_id = self.id

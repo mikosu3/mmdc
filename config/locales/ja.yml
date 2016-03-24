@@ -215,6 +215,7 @@ ja:
     title: タイトル
     note: 内容
     file: Emmファイル
+    description: 備考
   views:
     pagination:
       first: "&laquo;"

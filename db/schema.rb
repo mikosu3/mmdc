@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160308084640) do
+ActiveRecord::Schema.define(version: 20160324054612) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "name",         limit: 100, null: false
@@ -55,14 +55,15 @@ ActiveRecord::Schema.define(version: 20160308084640) do
   add_index "credit_logs", ["user_id"], name: "index_credit_logs_on_user_id", using: :btree
 
   create_table "credits", force: :cascade do |t|
-    t.string   "distribution", limit: 255, null: false
+    t.string   "distribution", limit: 255,              null: false
     t.integer  "lock_version", limit: 4
-    t.integer  "wanted_id",    limit: 4,   null: false
-    t.datetime "created_at",               null: false
-    t.datetime "updated_at",               null: false
-    t.string   "name",         limit: 255, null: false
+    t.integer  "wanted_id",    limit: 4,                null: false
+    t.datetime "created_at",                            null: false
+    t.datetime "updated_at",                            null: false
+    t.string   "name",         limit: 255,              null: false
     t.string   "url",          limit: 255
-    t.integer  "updated_by",   limit: 4,   null: false
+    t.integer  "updated_by",   limit: 4,                null: false
+    t.string   "description",  limit: 255, default: ""
   end
 
   add_index "credits", ["wanted_id"], name: "index_credits_on_wanted_id", unique: true, using: :btree
