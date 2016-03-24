@@ -27,3 +27,8 @@ doc/
 .DS_Store
 .idea
 .secret
+script/bundle
+script/rails
+script/rake
+script/setup
+script/spring
