@@ -28,6 +28,10 @@
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
           <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
         </button>
         <%= link_to "MMDクレジット", "/", class: "navbar-brand" %>
       </div>
@@ -38,8 +42,9 @@
           <li class= "<%= 'active' if controller.controller_name == 'wanteds' %>"><%= link_to sanitize('<i class="glyphicon glyphicon-comment"></i> ') + "Wanted", { controller: "wanteds" } %></li>
           <li class= "<%= 'active' if controller.controller_name == 'credits' %>"><%= link_to sanitize('<i class="glyphicon glyphicon-list-alt"></i> ') + "クレジット情報", { controller: "credits" } %></li>
           <li class= "<%= 'active' if controller.controller_name == 'authors' %>"><%= link_to sanitize('<i class="glyphicon glyphicon-user"></i> ') + "作者情報", { controller: "authors" } %></li>
-          <% if current_user != nil && current_user['is_admin'] %><li class= "<%= 'active' if controller.controller_name == 'infos' %>"><%= link_to sanitize('<i class="glyphicon glyphicon-bullhorn"></i> ') + "お知らせ", { controller: "infos" } %></li> <% end %>
-          <% if current_user != nil && current_user['is_admin'] %><li class= "<%= 'active' if controller.controller_name == 'users' %>"><%= link_to sanitize('<i class="glyphicon glyphicon-wrench"></i> ') + "ユーザー情報", { controller: "users" } %></li> <% end %>
+          <li class= "<%= 'active' if controller.controller_name == 'ranks' %>"><%= link_to sanitize('<i class="glyphicon glyphicon-flag"></i> ') + "ランキング", { controller: "ranks" } %></li>
+          <% if current_user != nil && current_user['is_admin'] %><li class= "<%= 'active' if controller.controller_name == 'infos' %>"><%= link_to sanitize('<i class="glyphicon glyphicon-bullhorn"></i> ') + "Info", { controller: "infos" } %></li> <% end %>
+          <% if current_user != nil && current_user['is_admin'] %><li class= "<%= 'active' if controller.controller_name == 'users' %>"><%= link_to sanitize('<i class="glyphicon glyphicon-wrench"></i> ') + "ユーザー", { controller: "users" } %></li> <% end %>
         </ul>
         <ul class="nav navbar-nav navbar-right">
             <li><a href="/logout"><i class="glyphicon glyphicon-log-out"></i> ログアウト</a></li>
