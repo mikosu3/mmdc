@@ -23,6 +23,8 @@ Rails.application.routes.draw do
 
   resources :users, :except => [:create, :show]
 
+  resources :ranks, :except => [:show, :delete, :create]
+
   root 'home#index'
   get "home/index"
 
