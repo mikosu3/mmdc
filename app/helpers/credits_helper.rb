@@ -18,11 +18,15 @@ module CreditsHelper
         # 動画
         when /^(s|n)m[0-9]+/ then
           xmldoc = NicovideoAPIWrapper::get_thumb_info_xml(id)
-          thnmb = <<-TAG
-            <iframe width="312" height="176" src="http://ext.nicovideo.jp/thumb/#{id}" scrolling="no" style="border:solid 1px #CCC;" frameborder="0">
-              <a href="#{xmldoc.elements['nicovideo_thumb_response/thumb/watch_url'].text}" target="_blank">#{xmldoc.elements['nicovideo_thumb_response/thumb/title'].text}</a>
-            </iframe>
-          TAG
+
+          # 動画タイトルはニコニコから取得する
+          unless xmldoc.elements['nicovideo_thumb_response/thumb/title'].nil?
+            thnmb = <<-TAG
+              <iframe width="312" height="176" src="http://ext.nicovideo.jp/thumb/#{id}" scrolling="no" style="border:solid 1px #CCC;" frameborder="0">
+                <a href="#{xmldoc.elements['nicovideo_thumb_response/thumb/watch_url'].text}" target="_blank">#{xmldoc.elements['nicovideo_thumb_response/thumb/title'].text}</a>
+              </iframe>
+            TAG
+          end
 
         # 静画
         when /^im[0-9]+/ then
