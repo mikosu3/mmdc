@@ -59,15 +59,20 @@ class EmmRegistService
       #フォルダ名
       mmd.folder_name = File.dirname(infostr).split("/").last
 
-      #同動画 同emmで同じものが登録されているか
-      v = Video.joins({:emm =>:mmd_object}).find_by(id:emm.video.id, emms:{id: emm.id},  mmd_objects:{folder_name: mmd.folder_name, file_name: mmd.file_name})
-      unless v
-        mmd.save
+      # 解析に失敗したものはスルー
+      if mmd.extension.present? && mmd.file_name.present? && mmd.folder_name.present?
+        #同動画 同emmで同じものが登録されているか
+        v = Video.joins({:emm =>:mmd_object}).find_by(id:emm.video.id, emms:{id: emm.id},  mmd_objects:{folder_name: mmd.folder_name, file_name: mmd.file_name})
+        unless v
+          mmd.save
 
-        # wantedになる場合は登録
-        if is_wanted(mmd.file_name, mmd.folder_name)
-          createWanted(mmd)
+          # wantedになる場合は登録
+          if is_wanted(mmd.file_name, mmd.folder_name)
+            createWanted(mmd)
+          end
         end
+      else
+        logger.warn("emm解析失敗 #{infostr} #{mmd}")
       end
     end
 
