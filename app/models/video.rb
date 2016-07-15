@@ -9,7 +9,7 @@ class Video < ActiveRecord::Base
   validates :name, length: { maximum: 100 }
   has_many :emm
 
-  paginates_per 15
+  paginates_per 10
 
   # 1動画で使用したオブジェクト数
   def self.set_total(video, emm_id = nil)
