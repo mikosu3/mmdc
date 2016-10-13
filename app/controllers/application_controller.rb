@@ -8,13 +8,19 @@ class ApplicationController < ActionController::Base
   protect_from_forgery
 
   def login_required
-    if session[:user_id]
-      @current_user = User.find(session[:user_id])
+
+    user = User.find_by_uid_and_auto_login_token(cookies.signed[:uid], cookies.signed[:auto_login_token])
+
+    if user
+      @current_user = user
 
       if @current_user.is_ban
         redirect_to logout_path, alert: 'お使いのアカウントはブロックされています。'
       end
-
+      
+      # トークンを更新
+      @current_user.save
+      rehash_token @current_user
     else
       redirect_to root_path, notice: 'ログインしてください。'
     end
@@ -22,6 +28,11 @@ class ApplicationController < ActionController::Base
   end
 
   helper_method :current_user
+
+  def rehash_token user
+      cookies.signed[:auto_login_token] = {:value => user.auto_login_token, :expires => 14.day.from_now}
+      cookies.signed[:uid] = {:value => user.uid, :expires => 14.day.from_now}
+  end
 
   #ログインしているユーザーID
   def get_user_id
@@ -56,9 +67,8 @@ class ApplicationController < ActionController::Base
     end
 
   def current_user
-    @current_user ||= User.find(session[:user_id]) if session[:user_id]
+    @current_user ||= User.find_by_uid_and_auto_login_token(cookies.signed[:uid], cookies.signed[:auto_login_token]) if (cookies.signed[:uid] && cookies.signed[:auto_login_token])
   end
-
 
   # ログインチェック
   def auth

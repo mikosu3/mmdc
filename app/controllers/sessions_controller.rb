@@ -14,11 +14,17 @@ class SessionsController < ApplicationController
     end
 
     session[:user_id] = user.id
+
+    # クッキー情報の更新
+    rehash_token user
+       
     redirect_to root_path
   end
 
   def destroy
     session[:user_id] = nil
+    cookies.delete :auto_login_token
+    cookies.delete :uid
     redirect_to root_path
   end
 
