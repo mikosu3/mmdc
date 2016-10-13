@@ -36,7 +36,8 @@ class ApplicationController < ActionController::Base
 
   #ログインしているユーザーID
   def get_user_id
-    return session[:user_id]
+    current_user
+    return @current_user.id
   end
 
   #ログインしているユーザーのツイッター名
