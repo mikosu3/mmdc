@@ -43,7 +43,7 @@
           <% if current_user != nil && current_user['is_admin'] %><li class= "<%= 'active' if controller.controller_name == 'users' %>"><%= link_to sanitize('<i class="glyphicon glyphicon-wrench"></i> ') + "ユーザー", { controller: "users" } %></li> <% end %>
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="/logout"><img src="http://www.paper-glasses.com/api/twipi/<%= current_user['screen_name'] %>/mini" width="20" class="img-rounded" > ログアウト</a></li>
+            <li><a href="/logout"><img src="http://www.paper-glasses.com/api/twipi/<%= current_user['screen_name'] %>/mini" width="15" class="img-rounded" > ログアウト</a></li>
         </ul>
     <% else %>
         <ul class="nav navbar-nav navbar-right">
