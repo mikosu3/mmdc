@@ -72,7 +72,7 @@ class EmmRegistService
           end
         end
       else
-        logger.warn("emm解析失敗 #{infostr} #{mmd}")
+        Rails.logger.warn("emm解析失敗 #{infostr} #{mmd}")
       end
     end
 
