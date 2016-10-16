@@ -35,6 +35,10 @@ class EmmRegistService
         emm_hash.each do | key, item|
           item = ''+ item.to_s
           item.strip
+          
+          # 全角の#を半角に戻す
+          item.gsub!("＃", "#")
+          
           unless item.empty? or item == "none" or item == 'true' or item == 'false'
             createMmdObject(emm, item)
           end
@@ -126,6 +130,9 @@ class EmmRegistService
     def self.copy_file(file, savefile_name)
       s = File.read(file.tempfile, encoding: 'Windows-31J:UTF-8')
       s.gsub!("\\" , "/");
+      
+      # #を全角にしてお茶を濁す
+      s.gsub!("#", "＃")
       File.write(get_save_file_path + savefile_name, s)
     end
 
