@@ -39,6 +39,7 @@ class Video < ActiveRecord::Base
                                       file_name
                                       ,folder_name
                                       ,extension
+                                  ORDER BY NULL
                           ) AS A
               ) AS total
               ,(
@@ -71,6 +72,7 @@ class Video < ActiveRecord::Base
                                           file_name
                                           ,folder_name
                                           ,extension
+                                      ORDER BY NULL
                               ) AS B
                           )
               ) AS yet
@@ -105,6 +107,7 @@ class Video < ActiveRecord::Base
                                       file_name
                                       ,folder_name
                                       ,extension
+                                  ORDER BY NULL
                           ) AS C
               ) AS want
               ,(
@@ -137,6 +140,7 @@ class Video < ActiveRecord::Base
                                       file_name
                                       ,folder_name
                                       ,extension
+                                  ORDER BY NULL
                           ) AS D
               ) AS resolveds;
     SQL

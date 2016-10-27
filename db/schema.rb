@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161013135110) do
+ActiveRecord::Schema.define(version: 20161027100338) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "name",         limit: 100, null: false
@@ -141,6 +141,7 @@ ActiveRecord::Schema.define(version: 20161013135110) do
     t.boolean  "is_show",                  default: true
   end
 
+  add_index "videos", ["is_show", "id"], name: "index_videos_on_is_show_and_id", using: :btree
   add_index "videos", ["user_id"], name: "index_videos_on_user_id", using: :btree
 
   create_table "wanteds", force: :cascade do |t|
