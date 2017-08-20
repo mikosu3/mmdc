@@ -32,3 +32,4 @@ script/rails
 script/rake
 script/setup
 script/spring
+/script/
