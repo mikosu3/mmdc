@@ -12,6 +12,9 @@ Rails.application.routes.draw do
     member do
       get 'zip'
     end
+    collection do
+      delete 'destroy_all'
+    end
   end
   resources :infos
   resources :credits, :except => [:show, :delete] do

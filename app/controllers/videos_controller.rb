@@ -80,13 +80,19 @@ class VideosController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  # 一括削除
+  def destroy_all
+    Video.delete_by_ids(params["ids"])
+    redirect_to(videos_url, notice: '動画情報を削除しました')
+  end
+  
 
   # zipファイルDL
   def zip
     dl_file = Video.create_dl_zip @video.id
     stat = File::stat(dl_file)
     send_file(dl_file, :filename => ERB::Util.url_encode(@video.name)+ '_' + Time.now.strftime('%Y%m%d%H%M%S') + '.zip', :length => stat.size)
-
   end
 
   private

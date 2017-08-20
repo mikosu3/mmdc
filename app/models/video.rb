@@ -11,6 +11,10 @@ class Video < ActiveRecord::Base
 
   paginates_per 10
 
+  def self.delete_by_ids(ids)
+    where(id: ids).update_all(is_show: false)
+  end
+
   # 1動画で使用したオブジェクト数
   def self.set_total(video, emm_id = nil)
     query = <<-SQL
