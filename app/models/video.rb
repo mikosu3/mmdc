@@ -168,7 +168,7 @@ class Video < ActiveRecord::Base
     zipfile_name = "#{Rails.root}/tmp/#{id}_#{Time.now.strftime('%Y%m%d%H%M%S%N')}.zip"
 
     # 必須データ取得
-    musts = Must.all
+    musts = Must.select_musts(find(id))
 
     csv = create_csv(id, musts)
     tree_txt = create_tree_txt(id, musts)

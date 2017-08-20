@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161027100338) do
+ActiveRecord::Schema.define(version: 20170820123314) do
 
   create_table "authors", force: :cascade do |t|
     t.string   "name",         limit: 100, null: false
@@ -115,7 +115,10 @@ ActiveRecord::Schema.define(version: 20161027100338) do
     t.datetime "updated_at",              null: false
     t.string   "name",        limit: 255
     t.string   "author_name", limit: 255
+    t.string   "category",    limit: 255
   end
+
+  add_index "musts", ["category"], name: "index_musts_on_category", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.boolean  "is_admin",                     default: false, null: false
