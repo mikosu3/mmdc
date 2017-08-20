@@ -68,9 +68,9 @@ gem 'google-analytics-rails'
 
 gem "auto_strip_attributes", "~> 2.0"
 
-source 'http://rails-assets.org' do
-  gem 'rails-assets-bootstrap-fileinput', '~> 2.5.0'
-end
+#source 'http://rails-assets.org' do
+#  gem 'rails-assets-bootstrap-fileinput', '~> 2.5.0'
+#end
 
 group :development, :test do
   gem 'rspec-rails', '~> 3.0.0'
