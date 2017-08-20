@@ -33,15 +33,14 @@
 <% end %>
 
 <script>
-$(document).ready(function() {
-	$('#upload_file').fileinput({
-		language : 'ja',
-		hideThumbnailContent : true,
-		allowedFileExtensions : ['emm', 'xml'],
-		removeFromPreviewOnError : true,
-		fileActionSettings : {
-			showZoom : false,
-		}
-	});
-}); 
+$('#upload_file').fileinput({
+	language : 'ja',
+	hideThumbnailContent : true,
+	allowedFileExtensions : ['emm', 'xml'],
+	removeFromPreviewOnError : true,
+	showUpload : false,
+	fileActionSettings : {
+		showZoom : false,
+	}
+});
 </script>
