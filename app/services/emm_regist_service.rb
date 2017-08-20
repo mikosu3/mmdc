@@ -1,31 +1,24 @@
 class EmmRegistService
-    #保存
-    def self.save(files, video)
-      files.each_with_index do | file, index |
-        save_emm(file, video, index)
-      end
-    end
-
+  class << self
     # emm情報を保存する
-    def self.save_emm(file, video, index)
-      @emm = Emm.new()
-      @emm.video = video
+    def save_emm(file, video, index)
+      emm = Emm.new()
+      emm.video = video
 
       #ファイル名設定
-      @emm.original_name = file.original_filename
-      @emm.save_file_name = video.user_id.to_s + "_"+  Time.now.strftime("%Y%m%d%H%M%S") + "_" + index.to_s + '.emm'
+      emm.original_name = file.original_filename
+      emm.save_file_name = video.user_id.to_s + "_"+  Time.now.strftime("%Y%m%d%H%M%S") + "_" + index.to_s + File.extname(file.original_filename)
 
       #ファイルコピー
-      copy_file(file, @emm.save_file_name)
-      @emm.save
-
+      copy_file(file, emm.save_file_name)
+      emm.save
 
       #MMDオブジェクト情報を登録
-      analyze_emm(get_save_file_path + @emm.save_file_name, @emm)
+      analyze_emm(get_save_file_path + emm.save_file_name, emm)
     end
 
     # emmファイルを解析し、登録する
-    def self.analyze_emm(file, emm)
+    def analyze_emm(file, emm)
       ini = IniFile.load(file, :encoding => "UTF-8")
       targets = ["Object", "Effect"]
 
@@ -47,7 +40,7 @@ class EmmRegistService
     end
 
     # 取得したini情報1行から欲しい項目を取得する
-    def self.createMmdObject(emm, infostr)
+    def createMmdObject(emm, infostr)
       mmd = MmdObject.new
       mmd.emm = emm
 
@@ -82,7 +75,7 @@ class EmmRegistService
 
 
     # wanted登録
-    def self.createWanted(mmd)
+    def createWanted(mmd)
 
       unless Wanted.find_by(folder_name: mmd.folder_name, file_name: mmd.file_name)
         wanted = Wanted.new
@@ -96,7 +89,7 @@ class EmmRegistService
 
 
     #3人以上が同じファイルを使っている場合はwanted
-    def self.is_wanted(file_name, folder_name)
+    def is_wanted(file_name, folder_name)
 
       query = <<-SQL
         SELECT
@@ -127,7 +120,7 @@ class EmmRegistService
     end
 
     # ファイル内のパス区切り文字を変更し、コピーする
-    def self.copy_file(file, savefile_name)
+    def copy_file(file, savefile_name)
       s = File.read(file.tempfile, encoding: 'Windows-31J:UTF-8')
       s.gsub!("\\" , "/");
       
@@ -137,7 +130,8 @@ class EmmRegistService
     end
 
     # アップされたemmファイルの保存先
-    def self.get_save_file_path
+    def get_save_file_path
       return Rails.application.secrets.save_dir_path
     end
+  end
 end
