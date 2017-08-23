@@ -73,7 +73,7 @@ class ApplicationController < ActionController::Base
 
   # ログインチェック
   def auth
-    if controller_name != "home" && controller_name != "sessions"
+    if controller_name != "home" && controller_name != "sessions" && controller_name != "infos"
       login_required
     end
   end
