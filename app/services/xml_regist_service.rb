@@ -12,6 +12,8 @@ class XmlRegistService < EmmRegistService
 
       # 欲しい要素のみ登録する
       targets.each do |target|
+        next if xml[target].nil?
+        
         xml[target].each do |row|
           next if !row.kind_of?(Hash) || !row.has_key?("File") 
           
