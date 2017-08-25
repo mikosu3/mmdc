@@ -43,7 +43,6 @@ class VideosController < ApplicationController
 
     respond_to do |format|
       if !upload_file.nil? && @video.save
-        
         UpfileManageService.save(upload_file, @video)
         format.html { redirect_to videos_url, notice: '動画情報を登録しました。' }
         format.json { render :show, status: :created, location: @video }

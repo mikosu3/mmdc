@@ -7,14 +7,19 @@ class XmlRegistService < EmmRegistService
     
     # xmlファイルを解析し、登録する
     def analyze_emm(file, emm)
-      xml = Hash.from_xml(File.read(file))["MMProject"]["Models"]
+      xml = Hash.from_xml(File.read(file))
+      hash2mmd_object(xml, emm)
+    end
+
+    def hash2mmd_object(raw, emm)
+      h = raw["MMProject"]["Models"]
       targets = ["Model", "Accessory", "Effect"]
 
       # 欲しい要素のみ登録する
       targets.each do |target|
-        next if xml[target].nil?
+        next if h[target].nil?
         
-        xml[target].each do |row|
+        h[target].each do |row|
           next if !row.kind_of?(Hash) || !row.has_key?("File") 
           
           item = row["File"]
@@ -22,7 +27,6 @@ class XmlRegistService < EmmRegistService
           if item.present?
             createMmdObject(emm, item)
           end          
-          
         end
       end
     end
