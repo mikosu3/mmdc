@@ -68,6 +68,8 @@ gem 'google-analytics-rails'
 
 gem "auto_strip_attributes", "~> 2.0"
 
+gem 'jquery-turbolinks'
+
 #source 'http://rails-assets.org' do
 #  gem 'rails-assets-bootstrap-fileinput', '~> 2.5.0'
 #end
