@@ -25,18 +25,14 @@ class XmlRegistService < EmmRegistService
           item = row["File"]
 
           if item.present?
-            createMmdObject(emm, item)
+            createMmdObject(emm, item.gsub("\\" , "/"))
           end          
         end
       end
     end
 
-    # ファイル内のパス区切り文字を変更し、コピーする
     def copy_file(file, savefile_name)
-      s = File.read(file.tempfile, encoding: 'UTF-8:UTF-8')
-      s.gsub!("\\" , "/");
-
-      File.write(get_save_file_path + savefile_name, s)
+      FileUtils.cp(file.tempfile, get_save_file_path + savefile_name)
     end
   end
 end

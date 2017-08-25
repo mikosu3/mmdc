@@ -14,8 +14,5 @@ class MpjRegistService < XmlRegistService
       hash2mmd_object(Hash.from_xml(mpj), emm)
     end
 
-    def copy_file(file, savefile_name)
-      FileUtils.cp(file.tempfile, get_save_file_path + savefile_name)
-    end
   end 
 end
