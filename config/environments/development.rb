@@ -46,4 +46,5 @@ Rails.application.configure do
   config.logger = Logger.new("log/development.log", 'daily')
   config.logger.formatter = Logger::Formatter.new
 
+  config.web_console.whitelisted_ips = '0.0.0.0/0'
 end
