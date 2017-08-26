@@ -5,7 +5,7 @@ class Must < ActiveRecord::Base
       
       # 動画によってmustを分ける
       video.emm.each do |emm|
-        if File.extname(emm.original_name) == ".xml"
+        if File.extname(emm.original_name) == ".xml" || File.extname(emm.original_name) == ".mpj"
           categories << "mmm"
         else
           categories << "mmd"
