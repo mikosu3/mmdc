@@ -48,9 +48,9 @@ class Credit < ActiveRecord::Base
     when /^(s|n)m[0-9]+/ then
       return 'http://www.nicovideo.jp/watch/' + distribution
     when /^im[0-9]+/ then
-      return 'http://seiga.nicovideo.jp/seiga/' + distribution
+      return 'https://seiga.nicovideo.jp/seiga/' + distribution
     when /^td[0-9]+/ then
-      return 'http://3d.nicovideo.jp/works/' + distribution
+      return 'https://3d.nicovideo.jp/works/' + distribution
     else
       return nil
     end

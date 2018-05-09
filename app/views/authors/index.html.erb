@@ -51,7 +51,7 @@
             <td>
                 <% unless author.nico.blank? %><%= link_to image_tag('icons/nico.jpg' ,{:class => "img-rounded", :width => "23px"}), 'http://www.nicovideo.jp/user/' + author.nico , :target => "_blank" %><% end %>
                 <% unless author.twitter.blank? %><%= link_to image_tag('icons/twitter.jpg' ,{:class => "img-rounded", :width => "23px"}), 'https://twitter.com/' + author.twitter , :target => "_blank" %><% end %>
-                <% unless author.pixiv.blank? %><%= link_to image_tag('icons/pixiv.jpg' ,{:class => "img-rounded", :height => "23px"}), 'http://www.pixiv.net/member.php?id=' + author.pixiv , :target => "_blank" %><% end %>
+                <% unless author.pixiv.blank? %><%= link_to image_tag('icons/pixiv.jpg' ,{:class => "img-rounded", :height => "23px"}), 'https://www.pixiv.net/member.php?id=' + author.pixiv , :target => "_blank" %><% end %>
                 <% unless author.url.blank? %><%= link_to sanitize('<span class="glyphicon glyphicon-home"></span>'), author.url , :target => "_blank" %><% end %>
                 <% unless author.email.blank? %><%= mail_to author.email, sanitize('<span class="glyphicon glyphicon-envelope"></span>') %><% end %>
             </td>
