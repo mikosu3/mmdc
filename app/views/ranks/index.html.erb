@@ -8,7 +8,7 @@
       <% @ranks.each do | rank | %>
       <tr <% if rank['user'].id == @current_user.id then %> class="success" <% end %>>
           <td class="text-right"><%= rank["rank"] %></td>
-          <td><img src="http://furyu.nazo.cc/twicon/<%= rank['user'].screen_name %>/mini" class="img-rounded"> <a href="https://twitter.com/<%= rank['user'].screen_name %>" target="_blank"><%= rank["user"].name %></a></td>
+          <td><img src="https://furyutei.work/gadget/twicon/<%= rank['user'].screen_name %>/mini" class="img-rounded"> <a href="https://twitter.com/<%= rank['user'].screen_name %>" target="_blank"><%= rank["user"].name %></a></td>
           <td><%= number_to_currency rank["point"], :unit => 'pt' %></td>
       </tr>
       <% end %>
