@@ -1,6 +1,6 @@
 class InfosController < ApplicationController
   before_action :set_info, only: [:show, :edit, :update, :destroy]
-  before_filter :check_admin, only:[:edit, :update, :new, :create]
+  before_action :check_admin, only:[:edit, :update, :new, :create]
 
   # GET /infos
   # GET /infos.json

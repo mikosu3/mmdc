@@ -1,4 +1,5 @@
-require File.expand_path('../boot', __FILE__)
+#require File.expand_path('../boot', __FILE__)
+require_relative 'boot'
 
 require 'rails/all'
 require 'csv'
@@ -13,6 +14,7 @@ module Mmdc
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.
+    config.load_defaults 5.1
 
     # Set Time.zone default to the specified zone and make Active Record auto-convert to this zone.
     # Run "rake -D time" for a list of tasks for finding time zone names. Default is UTC.
@@ -23,7 +25,7 @@ module Mmdc
     config.i18n.default_locale = :ja
 
     # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
+    #config.active_record.raise_in_transactional_callbacks = true
 
     # servicesクラスオートロード
     config.autoload_paths += %W(#{config.root}/app/services)
