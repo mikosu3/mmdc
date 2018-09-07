@@ -76,6 +76,8 @@ gem 'record_tag_helper'
 
 group :development, :test do
   gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'spring-commands-rspec'
 end
 
 group :development, :test do
@@ -91,5 +93,6 @@ group :development do
   gem 'spring'
 
   gem 'listen'
+  gem 'pry-rails'
 end
 

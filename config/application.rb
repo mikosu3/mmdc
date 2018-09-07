@@ -29,5 +29,13 @@ module Mmdc
 
     # servicesクラスオートロード
     config.autoload_paths += %W(#{config.root}/app/services)
+
+    config.generators do |g|
+      g.test_framework :rspec,
+                       view_specs: false,
+                       helper_specs: false,
+                       controller_specs: true,
+                       routing_specs: false
+    end
   end
 end
