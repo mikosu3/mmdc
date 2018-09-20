@@ -90,5 +90,13 @@ RSpec.describe Author, type: :model do
       expect(@author.valid?).to eq(false)
     end
 
+    describe 'フィルター処理' do
+      it 'save後、historyの登録は行われている事' do
+        expect {
+          @author.save
+        }.to change(History, :count).by(1)
+      end
+    end
+
   end
 end
