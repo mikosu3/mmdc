@@ -8,6 +8,7 @@ class Video < ActiveRecord::Base
   validates :name, presence: true
   validates :name, length: { maximum: 100 }
   has_many :emm
+  belongs_to :user
 
   paginates_per 10
 
