@@ -59,8 +59,6 @@ RSpec.describe AuthorsController, type: :controller do
       subject {delete :destroy,  params: {id: delete_author.id}}
       context do
         it "削除が行えること" do
-          pp delete_author
-
           expect {subject}.to change(Author, :count).by(-1)
         end
       end
