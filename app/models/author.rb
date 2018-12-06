@@ -1,5 +1,7 @@
 class Author < ActiveRecord::Base
 
+  belongs_to :user, class_name: 'User', foreign_key: 'updated_by'
+
   validates :name, presence: true
   validates :name, length: { maximum: 100 }
   validates :name, uniqueness: true
