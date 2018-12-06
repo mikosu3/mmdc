@@ -24,7 +24,7 @@ class CreditsController < ApplicationController
 
   # GET /credits/1/edit
   def edit
-    @wanted = Wanted.find(@credit.wanted)
+    @wanted = @credit.wanted
 
     @credit.author_names = []
     @credit.authors.each do | row |

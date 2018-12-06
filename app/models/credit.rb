@@ -3,7 +3,7 @@ class Credit < ActiveRecord::Base
   attr_accessor :distribution_url
 
   belongs_to :wanted
-  belongs_to :author
+  belongs_to :user, class_name: 'User', foreign_key: 'updated_by'
 
   has_many :credit_log, dependent: :destroy
 

@@ -1,6 +1,9 @@
 FactoryBot.define do
   factory :credit do
     sequence(:name) { |n| "クレジット#{n}号"}
+    wanted
+    user
+    distribution "sm9"
   end
 end
 
