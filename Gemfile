@@ -80,10 +80,9 @@ group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
   gem 'spring-commands-rspec'
-end
-
-group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'rails-controller-testing'
+  gem 'rubocop-rspec'
+  gem 'capybara'
   gem 'byebug'
 end
 
