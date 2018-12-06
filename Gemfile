@@ -74,6 +74,8 @@ gem 'record_tag_helper'
 #  gem 'rails-assets-bootstrap-fileinput', '~> 2.5.0'
 #end
 
+gem 'ridgepole'
+
 group :development, :test do
   gem 'rspec-rails'
   gem 'factory_bot_rails'
@@ -94,5 +96,7 @@ group :development do
 
   gem 'listen'
   gem 'pry-rails'
+
+  gem 'annotate', git: 'git://github.com/ctran/annotate_models.git'
 end
 

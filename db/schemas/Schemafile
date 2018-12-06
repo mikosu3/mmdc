@@ -1,0 +1,15 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+require 'authors.schema'
+require 'authors_credit_logs.schema'
+require 'authors_credits.schema'
+require 'credit_logs.schema'
+require 'credits.schema'
+require 'emms.schema'
+require 'histories.schema'
+require 'infos.schema'
+require 'mmd_objects.schema'
+require 'musts.schema'
+require 'users.schema'
+require 'videos.schema'
+require 'wanteds.schema'

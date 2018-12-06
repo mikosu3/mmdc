@@ -1,0 +1,16 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+create_table "authors", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  t.string "name", limit: 100, null: false
+  t.string "url"
+  t.string "twitter"
+  t.string "pixiv"
+  t.string "email"
+  t.integer "lock_version"
+  t.datetime "created_at", null: false
+  t.datetime "updated_at", null: false
+  t.string "nico"
+  t.string "disp_name"
+  t.integer "updated_by", null: false
+  t.index ["name"], name: "index_authors_on_name", unique: true
+end

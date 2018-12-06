@@ -1,0 +1,11 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+create_table "musts", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  t.string "video"
+  t.datetime "created_at", null: false
+  t.datetime "updated_at", null: false
+  t.string "name"
+  t.string "author_name"
+  t.string "category"
+  t.index ["category"], name: "index_musts_on_category"
+end

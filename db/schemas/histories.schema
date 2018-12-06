@@ -1,0 +1,10 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+create_table "histories", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  t.string "link"
+  t.datetime "created_at", null: false
+  t.datetime "updated_at", null: false
+  t.string "item"
+  t.string "item_name"
+  t.boolean "is_create", default: true, null: false
+end
