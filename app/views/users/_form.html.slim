@@ -1,0 +1,33 @@
+= form_for(@user, html: { class: "form-horizontal", role: "form"}) do |f|
+  - if @user.errors.any?
+    .alert.alert-danger.alert-dismissable[role="alert"]
+      button.close[type="button" data-dismiss="alert"]
+        span[aria-hidden="true"]
+          | ×
+        span.sr-only
+          | 閉じる
+      h4
+        | 入力エラーがあります:
+      ul
+        - @user.errors.full_messages.each do |msg|
+          li
+            = msg
+  .form-group
+    = f.label :name, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :name, class: "form-control"
+  .form-group
+    = f.label :uid, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :uid, class: "form-control"
+  .form-group
+    = f.label :is_admin, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :is_admin, class: "form-control"
+  .form-group
+    = f.label :is_ban, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :is_ban, class: "form-control"
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit class: "btn btn-primary"

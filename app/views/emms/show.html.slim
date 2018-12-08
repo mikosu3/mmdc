@@ -1,0 +1,40 @@
+.page-header
+  = link_to video_emms_path(@emm.video_id), class: 'btn btn-default' do
+    span.glyphicon.glyphicon-list-alt
+    |  Back 
+  h1
+    = @emm.original_name
+    small
+      | Emmの詳細情報
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th
+          | 状態
+        th
+          | フォルダ名
+        th
+          | ファイル名
+    tbody
+      - @emm_details.each do |detail|
+        tr
+          td
+            - if !detail['credit_id'].nil? then
+              span.label.label-success
+                | 解決
+            - elsif !detail['wanted_id'].nil? then
+              span.label.label-info
+                | Wanted
+            - else
+              span.label.label-default
+                | 未解決
+          td
+            = detail['folder_name']
+          td
+            - if !detail['credit_id'].nil? then
+              = link_to detail['file_name'] ,edit_credit_path(detail['credit_id'])
+            - elsif !detail['wanted_id'].nil? then
+              = link_to detail['file_name'] ,add_credits_path(detail['wanted_id'])
+            - else
+              = detail['file_name']

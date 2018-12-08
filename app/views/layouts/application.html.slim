@@ -1,0 +1,99 @@
+doctype html
+html
+  head
+    meta[charset="utf-8"]
+    meta[http-equiv="X-UA-Compatible" content="IE=edge"]
+    meta[name="viewport" content="width=device-width, initial-scale=1"]
+    meta[name="keywords" content="MMD,MikuMikuDance,クレジット,モデル,アクセサリ,エフェクト"]
+    meta[name="description" content="MMD動画作成で何かと大変なクレジット表記の作業をアシストします"]
+    meta[name="author" content="tiger-star.net"]
+    title
+      | MMDクレジット
+    = analytics_init if Rails.env.production?
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true
+    = javascript_include_tag 'application', 'data-turbolinks-track' => true
+    = csrf_meta_tags
+  body
+    #fb-root
+    nav.navbar.navbar-inverse.navbar-fixed-top[role="navigation"]
+      .container
+        .navbar-header
+          button.navbar-toggle.collapsed[type="button" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar"]
+            span.sr-only
+              | メニュー
+            span.icon-bar
+            span.icon-bar
+            span.icon-bar
+          = link_to "MMDクレジット", "/", class: "navbar-brand"
+        #navbar.collapse.navbar-collapse
+          - if current_user
+            ul.nav.navbar-nav
+              |  <li class= "
+              = 'active' if controller.controller_name == 'videos'
+              | ">
+              = link_to sanitize('<i class="glyphicon glyphicon-film"></i> ') + "動画情報", { controller: "videos" }
+              |  <li class= "
+              = 'active' if controller.controller_name == 'wanteds'
+              | ">
+              = link_to sanitize('<i class="glyphicon glyphicon-comment"></i> ') + "Wanted", { controller: "wanteds" }
+              |  <li class= "
+              = 'active' if controller.controller_name == 'credits'
+              | ">
+              = link_to sanitize('<i class="glyphicon glyphicon-list-alt"></i> ') + "クレジット情報", { controller: "credits" }
+              |  <li class= "
+              = 'active' if controller.controller_name == 'authors'
+              | ">
+              = link_to sanitize('<i class="glyphicon glyphicon-user"></i> ') + "作者情報", { controller: "authors" }
+              |  <li class= "
+              = 'active' if controller.controller_name == 'ranks'
+              | ">
+              = link_to sanitize('<i class="glyphicon glyphicon-flag"></i> ') + "ランキング", { controller: "ranks" }
+              - if current_user != nil && current_user['is_admin']
+                | <li class= "
+                = 'active' if controller.controller_name == 'infos'
+                | ">
+                = link_to sanitize('<i class="glyphicon glyphicon-bullhorn"></i> ') + "Info", { controller: "infos" }
+              - if current_user != nil && current_user['is_admin']
+                | <li class= "
+                = 'active' if controller.controller_name == 'users'
+                | ">
+                = link_to sanitize('<i class="glyphicon glyphicon-wrench"></i> ') + "ユーザー", { controller: "users" }
+            ul.nav.navbar-nav.navbar-right
+              li
+                a[href="/logout"]
+                  | <img src="https://furyutei.work/gadget/twicon/
+                  = current_user['screen_name']
+                  | /mini" width="17" class="img-rounded" > ログアウト
+          - else
+            ul.nav.navbar-nav.navbar-right
+              li
+                a[href="/auth/twitter"]
+                  i.glyphicon.glyphicon-log-in
+                  |  ログイン
+    .container
+      .row
+        .col-sm-9
+          - flash.each do |name, msg|
+            = content_tag :div, class: "alert alert-#{ name == "alert" ? "danger" : "success" } alert-dismissable #{name}", role: "alert" do
+              button.close[type="button" data-dismiss="alert"]
+                span[aria-hidden="true"]
+                  | ×
+                span.sr-only
+                  | 閉じる
+              = msg
+          = yield
+        .col-sm-3
+          = render 'sides/sidemenu'
+    #footer
+      footer.footer
+        span
+          | コインの寄付頂けるとやる気がでます 
+        ul.list-unstyled
+          li
+            | Bitcoin : 1CcvdBHvVdeYzzT2aPKvFhwks8LH5CoSm1
+          li
+            | Mona : Gy6EBSmBosPy232VTrjMdhtY5EtY4iT6t
+        p.small
+          | © 2016 MMDC powered by 
+          a[href="https://tiger-star.net/" target="_blank"]
+            | Tiger Star

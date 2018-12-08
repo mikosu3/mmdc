@@ -69,6 +69,7 @@ gem 'auto_strip_attributes'
 gem 'jquery-turbolinks'
 
 gem 'record_tag_helper'
+gem 'slim-rails'
 
 #source 'http://rails-assets.org' do
 #  gem 'rails-assets-bootstrap-fileinput', '~> 2.5.0'

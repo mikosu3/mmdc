@@ -1,0 +1,38 @@
+.page-header
+  = link_to authors_path, class: 'btn btn-default' do
+    span.glyphicon.glyphicon-list-alt
+    |  Back 
+  = link_to edit_author_path(@author), class: 'btn btn-primary' do
+    span.glyphicon.glyphicon-pencil
+    |  Edit 
+  h1
+    | Show author
+dl.dl-horizontal
+  dt
+    | Credit:
+  dd
+    = @author.credit
+  dt
+    | Name:
+  dd
+    = @author.name
+  dt
+    | Url:
+  dd
+    = @author.url
+  dt
+    | Twitter:
+  dd
+    = @author.twitter
+  dt
+    | Pixiv:
+  dd
+    = @author.pixiv
+  dt
+    | Email:
+  dd
+    = @author.email
+  dt
+    | Lock version:
+  dd
+    = @author.lock_version

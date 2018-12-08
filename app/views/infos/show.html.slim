@@ -1,0 +1,13 @@
+.page-header
+  = link_to infos_path, class: 'btn btn-default' do
+    span.glyphicon.glyphicon-list-alt
+    |  Back 
+  - if current_user && current_user['is_admin']
+    = link_to edit_info_path(@info), class: 'btn btn-primary' do
+      span.glyphicon.glyphicon-pencil
+      |  編集 
+  h1
+    = @info.title
+    small
+      = @info.date.strftime('%Y/%m/%d')
+= simple_format(@info.note)

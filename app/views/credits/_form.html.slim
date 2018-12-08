@@ -1,0 +1,80 @@
+= form_for(@credit, html: {class: "form-horizontal", role: "form"}) do |f|
+  - if @credit.errors.any?
+    .alert.alert-danger.alert-dismissable[role="alert"]
+      button.close[type="button" data-dismiss="alert"]
+        span[aria-hidden="true"]
+          | ×
+        span.sr-only
+          | 閉じる
+      h4
+        | 入力エラーがあります:
+      ul
+        - @credit.errors.full_messages.each do |msg|
+          li
+            = msg
+  = f.hidden_field :wanted_id, :value => @wanted.id
+  .form-group
+    .col-sm-2
+    .col-sm-10
+      .panel.panel-primary
+        .panel-heading
+          |  モデル情報 
+        .panel-body
+          .col-sm-2
+            strong
+              | フォルダ名
+          .col-sm-10
+            = @wanted.folder_name
+          .col-sm-2
+            strong
+              | ファイル名
+          .col-sm-10
+            = @wanted.file_name
+  .form-group
+    = f.label '名前', class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :name, class: "form-control", :maxlength => 100, :placeholder => "モデルやアクセサリ、エフェクト名"
+  .form-group
+    = f.label :author_names, class: "col-sm-2 control-label"
+    #append_area.col-sm-10
+      - @credit.author_names.each_with_index do |val, idx|
+        = autocomplete_field_tag "author_names[]",
+                @credit.author_names[idx],
+                autocomplete_author_name_credits_path,
+                :class => 'form-control',
+                :placeholder => '作者名'
+      a#append.small[href="#" onclick="return false"]
+        | 行追加
+  .form-group
+    = f.label :distribution, class: "col-sm-2 control-label"
+    .col-sm-10
+      = raw get_thumb(@credit.distribution)
+      = f.text_field :distribution, class: "form-control", :maxlength => 20, :placeholder => "im sm td nmで始まるもの"
+  .form-group
+    = f.label :url, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :url, class: "form-control", :maxlength => 200, :placeholder => "ニコニコ以外の配布先があれば"
+  .form-group
+    = f.label :description, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_area :description, class: "form-control", :placeholder => "その他、何かあれば", :rows => 5
+  - unless  @credit.updated_at.nil? then
+    .form-group
+      = f.label :updated_screen_name, class: "col-sm-2 control-label"
+      .col-sm-10
+        #updated_screen_name
+          a href="https://twitter.com/#{@credit.updated_screen_name}"
+            img.image src="https://furyutei.work/gadget/twicon/#{@credit.updated_screen_name}"
+          br
+          span.small= @credit.updated_at.strftime('%Y年%m月%d日 %H:%M:%S')
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit class: "btn btn-primary"
+
+  - app_val = autocomplete_field_tag("author_names[]",'',autocomplete_author_name_credits_path, :class => 'form-control', :placeholder => '作者名')
+  javascript:
+    $(function () {
+      $('#append').click(function () {
+        $('#append_area').append('#{app_val}');
+      });
+    });

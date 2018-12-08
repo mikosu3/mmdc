@@ -1,0 +1,16 @@
+.page-header
+  - if current_user && current_user['is_admin']
+    = link_to new_info_path, class: 'btn btn-primary' do
+      span.glyphicon.glyphicon-plus
+      |  新規作成 
+  h1
+    | お知らせ一覧
+.table-responsive
+  table.table.table-stripe.table-hover
+    tbody
+      - @infos.each do |info|
+        tr
+          td[width="100"]
+            = info.date
+          td
+            = link_to info.title, info

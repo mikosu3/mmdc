@@ -1,0 +1,63 @@
+h1
+  | 統計
+div
+  table.table.table-responsive.table-hover
+    tr
+      td
+        | Wantend
+      td.text-right
+        = number_to_currency @wanted_size, :unit => '件'
+      td.text-right
+        - if @wanted_today_size > 0 then
+          span.label.label-primary
+            | +
+            = number_to_currency @wanted_today_size, :unit => ''
+    tr
+      td
+        | クレジット情報
+      td.text-right
+        = number_to_currency @credit_size, :unit => '件'
+      td.text-right
+        - if @credit_today_size > 0 then
+          span.label.label-primary
+            | +
+            = number_to_currency @credit_today_size, :unit => ''
+    tr
+      td
+        | 作者情報
+      td.text-right
+        = number_to_currency @author_size, :unit => '件'
+      td.text-right
+        - if @author_today_size > 0 then
+          span.label.label-primary
+            | +
+            = number_to_currency @author_today_size, :unit => ''
+hr
+.btn-group
+  a[title="Twitterでつぶやく" href="https://twitter.com/share?url=https://mmdc.tiger-star.net/&text=MMDクレジット MMDのクレジット表記作業を楽にしよう&hashtags=mmdc" target="_blank" onclick="window.open(this.href, 'FBwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"]
+    img[alt="Twitterでつぶやく" src="/images/Twitter.png"]
+  a[title="facebookでシェアする" href="https://www.facebook.com/sharer.php?u=https://mmdc.tiger-star.net/&t=MMDクレジット MMDのクレジット表記作業を楽にしよう" target="_blank" rel="nofollow" onclick="window.open(this.href, 'FBwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"]
+    img[alt="facebookでシェアする" src="/images/Facebook.png"]
+  a[title="Google+でシェア" href="https://plus.google.com/share?url=https://mmdc.tiger-star.net/" onclick="window.open(this.href, 'Gwindow', 'width=650, height=450, menubar=no, toolbar=no, scrollbars=yes'); return false;"]
+    img[src="/images/Google+.png" alt="Google+でシェア"]
+  a.hatena-bookmark-button[href="http://b.hatena.ne.jp/entry/s/mmdc.tiger-star.net/" data-hatena-bookmark-layout="simple" title="MMDクレジット MMDのクレジット表記作業を楽にしよう"]
+    img[src="/images/hatebu.png" alt="はてなブックマークに追加"]
+  script[type="text/javascript" src="https://b.st-hatena.com/js/bookmark_button.js" charset="utf-8" async="async"]
+  a[title="Pocketで後で読む" href="https://getpocket.com/edit?url=https://mmdc.tiger-star.net/&title=MMDクレジット MMDのクレジット表記作業を楽にしよう" onclick="window.open(this.href, 'FBwindow', 'width=550, height=350, menubar=no, toolbar=no, scrollbars=yes'); return false;"]
+    img[src="/images/Pocket.png" alt="Pocketで後で読む"]
+  a[title="RSSを購読する" href="/home/index.rss"]
+    img[src="/images/social-icon-w28c.png" alt="RSSを購読する"]
+h2
+  | 更新情報
+dl
+  - @histories.each do | history |
+    dt
+      = history.created_at.strftime('%Y/%m/%d %H:%M:%S')
+    dd.small
+      p class= histry_item_css(history.item)
+        = history.item
+      = sanitize(history.is_create? ? ' 登録 ':' 更新 ')
+      - if (current_user)
+         = link_to history.item_name.truncate(20), history.link
+      - if (!current_user)
+         = history.item_name.truncate(20)

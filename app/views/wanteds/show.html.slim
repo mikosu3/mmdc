@@ -1,0 +1,26 @@
+.page-header
+  = link_to wanteds_path, class: 'btn btn-default' do
+    span.glyphicon.glyphicon-list-alt
+    |  Back 
+  = link_to edit_wanted_path(@wanted), class: 'btn btn-primary' do
+    span.glyphicon.glyphicon-pencil
+    |  Edit 
+  h1
+    | Show wanted
+dl.dl-horizontal
+  dt
+    | File name:
+  dd
+    = @wanted.file_name
+  dt
+    | Folder name:
+  dd
+    = @wanted.folder_name
+  dt
+    | Extension:
+  dd
+    = @wanted.extension
+  dt
+    | Lock version:
+  dd
+    = @wanted.lock_version
