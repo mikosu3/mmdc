@@ -1,0 +1,18 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+create_table "wanteds", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  t.string "file_name", limit: 200, null: false
+  t.string "folder_name", limit: 200, null: false
+  t.string "extension", limit: 10, null: false
+  t.integer "lock_version"
+  t.datetime "created_at", null: false
+  t.datetime "updated_at", null: false
+  t.index ["file_name", "folder_name", "extension"], name: "index_wanteds_on_file_name_and_folder_name_and_extension", unique: true
+end
+
+add_foreign_key "credit_logs", "authors"
+add_foreign_key "credit_logs", "credits"
+add_foreign_key "credit_logs", "users"
+add_foreign_key "credits", "wanteds"
+add_foreign_key "mmd_objects", "emms"
+add_foreign_key "videos", "users"

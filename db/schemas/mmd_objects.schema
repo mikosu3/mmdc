@@ -1,0 +1,14 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+create_table "mmd_objects", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  t.string "extension", limit: 10, null: false
+  t.string "file_name", limit: 200, null: false
+  t.string "folder_name", limit: 200, null: false
+  t.string "full_path", null: false
+  t.integer "lock_version"
+  t.integer "emm_id", null: false
+  t.datetime "created_at", null: false
+  t.datetime "updated_at", null: false
+  t.index ["emm_id"], name: "index_mmd_objects_on_emm_id"
+  t.index ["file_name", "folder_name", "extension"], name: "index_mmd_objects_on_file_name_and_folder_name_and_extension"
+end

@@ -1,0 +1,36 @@
+.page-header
+  = link_to videos_path, class: 'btn btn-default' do
+    span.glyphicon.glyphicon-list-alt
+    |  Back 
+  h1
+    = @emms[0].video.name
+    small
+      | Emm毎の個別情報です
+  small
+    | 動画情報は重複を除いて計上されるので動画情報の総数とは差異があります。
+.table-responsive
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th
+          | Emm名
+        th
+          | 総数
+        th
+          | 解決
+        th
+          | Wanted
+        th
+          | 未解決
+    tbody
+      = content_tag_for(:tr, @emms) do |emm|
+        td
+          = link_to emm.original_name, emm_path(emm)
+        td.text-right
+          = emm.video.total
+        td.text-right
+          = emm.video.resolveds
+        td.text-right
+          = emm.video.wants
+        td.text-right
+          = emm.video.yets

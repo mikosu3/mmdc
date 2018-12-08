@@ -1,0 +1,14 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+create_table "credits", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  t.string "distribution", null: false
+  t.integer "lock_version"
+  t.integer "wanted_id", null: false
+  t.datetime "created_at", null: false
+  t.datetime "updated_at", null: false
+  t.string "name", null: false
+  t.string "url"
+  t.integer "updated_by", null: false
+  t.string "description", default: ""
+  t.index ["wanted_id"], name: "index_credits_on_wanted_id", unique: true
+end

@@ -1,0 +1,10 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+create_table "emms", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  t.string "original_name", null: false
+  t.string "save_file_name", null: false
+  t.integer "lock_version"
+  t.datetime "created_at", null: false
+  t.datetime "updated_at", null: false
+  t.integer "video_id"
+end

@@ -1,0 +1,18 @@
+.page-header
+  = link_to credits_path, class: 'btn btn-default' do
+    span.glyphicon.glyphicon-list-alt
+    |  Back 
+  = link_to edit_credit_path(@credit), class: 'btn btn-primary' do
+    span.glyphicon.glyphicon-pencil
+    |  Edit 
+  h1
+    | Show credit
+dl.dl-horizontal
+  dt
+    | Index:
+  dd
+    = @credit.index
+  dt
+    | Edit:
+  dd
+    = @credit.edit

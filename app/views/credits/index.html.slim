@@ -1,0 +1,68 @@
+.page-header
+  h1
+    | クレジット情報 
+    small
+      | 作者情報が提供済のデータ
+= search_form_for @q , html: { class: "form-horizontal", role: "form"} do |f|
+  .panel.panel-default
+    .panel-heading
+      span.glyphicon.glyphicon-search[aria-hidden="true"]
+      span
+        | 検索条件
+    .panel-body
+      .form-group
+        = f.label :name_cont, '名前', class: "col-sm-2 control-label"
+        .col-sm-3
+          = f.text_field :name_cont, class: "form-control"
+        = f.label :authors_name_cont, "作者名", class: "col-sm-2 control-label"
+        .col-sm-3
+          = f.text_field :authors_name_cont, class: "form-control"
+      .form-group
+        = f.label :wanted_folder_name_cont, "フォルダ名", class: "col-sm-2 control-label"
+        .col-sm-3
+          = f.text_field :wanted_folder_name_cont, class: "form-control"
+        = f.label :wanted_file_name_cont, 'ファイル名', class: "col-sm-2 control-label"
+        .col-sm-3
+          = f.text_field :wanted_file_name_cont, class: "form-control"
+      .form-group
+        .col-sm-4.col-sm-offset-2
+          = f.submit '検索' ,class: "btn btn-primary"
+          a.btn.btn-default[href="#" onclick="clearFormAll();return false"]
+            | リセット
+.table-responsive
+  .text-right
+    - unless @credits.total_count == 0
+      = @credits.offset_value + 1
+      | 〜
+      = @credits.offset_value + @credits.length
+      | 件 / 
+    = @credits.total_count
+    | 件
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th
+          = sort_link(@q, :name)
+        th
+          | 作者名
+        th
+          | 配布先
+        th
+          = sort_link(@q, :wanted_folder_name, 'フォルダ名')
+        th
+          = sort_link(@q, :wanted_file_name, 'ファイル名')
+    tbody
+      = content_tag_for(:tr, @credits) do |credit|
+        td
+          = link_to credit.name.truncate(15), edit_credit_path(credit)
+        td
+          - credit.authors.each do | author |
+            =author.name.truncate(15)
+            br
+        td
+          = link_to_unless(credit.distribution_url.blank?, credit.distribution, credit.distribution_url)
+        td
+          = credit.wanted.folder_name.truncate(10)
+        td
+          = credit.wanted.file_name.truncate(10)
+  = paginate(@credits)

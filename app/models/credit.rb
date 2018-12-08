@@ -3,7 +3,7 @@ class Credit < ActiveRecord::Base
   attr_accessor :distribution_url
 
   belongs_to :wanted
-  belongs_to :author
+  belongs_to :user, class_name: 'User', foreign_key: 'updated_by'
 
   has_many :credit_log, dependent: :destroy
 
@@ -14,7 +14,6 @@ class Credit < ActiveRecord::Base
 
   validates :name, presence: true
   validates :name, length: { maximum: 100 }
-  validates :wanted_id, uniqueness: true
   validates :distribution, length: { maximum: 250 }, format: { with: /(^$)|(^(sm|im|td|nm)[0-9]+$)/ix, allow_blank: true }
   validates :url, format: { with: /(^$)|(^(http|https):\/\/[a-z0-9]+([\-\.]{1}[a-z0-9]+)*\.[a-z]{2,5}(([0-9]{1,5})?\/.*)?$)/ix, allow_blank: true }, length: { maximum: 250 }
   validates :description, length: { maximum: 255 }
@@ -155,3 +154,23 @@ class Credit < ActiveRecord::Base
       end
     end
 end
+
+# == Schema Information
+#
+# Table name: credits
+#
+#  id           :integer          not null, primary key
+#  distribution :string(255)      not null
+#  lock_version :integer
+#  wanted_id    :integer          not null
+#  created_at   :datetime         not null
+#  updated_at   :datetime         not null
+#  name         :string(255)      not null
+#  url          :string(255)
+#  updated_by   :integer          not null
+#  description  :string(255)      default("")
+#
+# Indexes
+#
+#  index_credits_on_wanted_id  (wanted_id) UNIQUE
+#

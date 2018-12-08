@@ -1,0 +1,27 @@
+= form_for(@video, html: { class: "form-horizontal", role: "form" ,:multipart => true, :enctype => "multipart/form-data"}) do |f|
+  - if @video.errors.any?
+    .alert.alert-danger.alert-dismissable[role="alert"]
+      button.close[type="button" data-dismiss="alert"]
+        span[aria-hidden="true"]
+          | ×
+        span.sr-only
+          | 閉じる
+      h4
+        | 入力エラーがあります:
+      ul
+        - @video.errors.full_messages.each do |msg|
+          li
+            = msg
+  .form-group
+    = f.label :name, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :name, class: "form-control" , :placeholder => "動画名など、自分用なので自由に入力してください"
+  .form-group
+    = f.label :file, class: "col-sm-2 control-label"
+    .col-sm-10
+      = file_field_tag :file, :name => "file[]", id:"upload_file", multiple:"true"
+      small
+        | ファイル選択画面でCtrl+クリックすると複数選択できます。emm/mpj対応。
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit class: "btn btn-primary"

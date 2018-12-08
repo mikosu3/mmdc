@@ -16,3 +16,20 @@ class Must < ActiveRecord::Base
     end
   end
 end
+
+# == Schema Information
+#
+# Table name: musts
+#
+#  id          :integer          not null, primary key
+#  video       :string(255)
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  name        :string(255)
+#  author_name :string(255)
+#  category    :string(255)
+#
+# Indexes
+#
+#  index_musts_on_category  (category)
+#

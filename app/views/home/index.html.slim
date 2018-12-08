@@ -1,0 +1,120 @@
+header.jumbotron
+  .container
+    h1
+      | MMDクレジット
+    p
+      | MMDのモデル情報を共有しクレジットを楽にまとめよう！
+    - unless current_user
+      p
+        = link_to image_tag("sign-in-with-twitter-gray.png"), '/auth/twitter'
+        small
+          | 当サイトを利用するにはログインが必要です。
+h2
+  | お知らせ
+table.table.table-responsive.table-hover
+  tbody
+    - @side_infos.each do | info |
+      tr
+        td[width="120"]
+          = info.date.strftime('%Y/%m/%d')
+        td
+          = link_to info.title, info
+  - if @side_infos.length == 5 then
+    tfoot
+      tr
+        td[colspan="2"]
+          span.small
+            a[href="/infos"]
+              | 全て見る
+hr
+h2
+  | これは何？
+p
+  | MMD動画制作における制作者の負担を軽減する為、MMDクレジットでは下記の機能を提供します。
+p
+  | 他の制作者と情報共有することにより意外に大変なクレジット表記の作業を軽減しましょう！
+.row
+  .col-sm-4
+    .text-center
+      img.img-rounded[src="/images/merge.png"]
+    div
+      h3.text-center.text-success
+        | マージ
+      p
+        | アップロードした複数のemmファイルからモデル、アクセサリ情報を取得し、重複を取り除きます。
+  .col-sm-4
+    .text-center
+      img.img-rounded[src="/images/share.png"]
+    div
+      h3.text-center.text-success
+        | 共有
+      p
+        | 他の人もよく使っているモデル、アクセサリの情報を共有し、配布先情報等を自動で取り込むことができます。
+  .text-center
+    .text-center
+      img.img-rounded[src="/images/dl.png"]
+    div
+      h3.text-center.text-success
+        | ダウンロード
+      p
+        | 使用モデル、アクセサリ情報の一覧表(csv)とコンテンツツリー登録用テキストファイルを生成し、ダウンロードすることができます。
+hr
+h2
+  | まずは使ってみよう！
+.row
+  .col-sm-8
+    .embed-responsive.embed-responsive-16by9
+      iframe.embed-responsive-item[src="https://www.youtube.com/embed/Z8OI8K7uyF8" frameborder="0" allowfullscreen]
+  .col-sm-4
+    h3.text-info
+      | STEP1
+    p
+      | まずは
+      = link_to 'ログイン', '/auth/twitter'
+      | しましょう。
+    h3.text-info
+      | STEP2
+    p
+      | 動画情報のページからEmmファイルをアップロードしましょう。
+    h3.text-info
+      | STEP3
+    p
+      | 動画情報の一覧からzipファイルをダウンロードできるようになります。
+hr
+h2
+  | 貢献度ランキング
+.row
+  - @ranks.each do | rank |
+    .col-sm-4
+      .row
+        .col-sm-4
+          |  <img src ="/images/rank
+          = rank['rank']
+          | .png" class="img-rounded" width="70" alt="rank
+          = rank['rank']
+          | "> 
+        .col-sm-8
+          |  <img src="https://furyutei.work/gadget/twicon/
+          = rank['user'].screen_name
+          | /bigger" class="img-rounded"> 
+          p
+            | <a href="https://twitter.com/
+            = rank['user'].screen_name
+            | " target="_blank">
+            = rank["user"].name
+          p
+            = number_to_currency rank["point"], :unit => 'pt'
+hr
+h2
+  | ソースコードについて
+.row
+  .col-sm-12
+    ul.list-inline
+      li
+        = link_to image_tag("/images/GitHub-Mark-64px.png", :class => "img-circle"), 'https://github.com/mikosu3/mmdc', target: "_blank"
+      li[style="vertical-align: middle;"]
+        = link_to 'GitHub', 'https://github.com/mikosu3/mmdc', target: "_blank"
+        | にてソースコードを公開しています。
+        br
+        |  よりよいシステムになるよう皆様からのプルリクエストお待ちしています。
+        br

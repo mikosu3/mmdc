@@ -1,0 +1,30 @@
+= form_for(@info, html: { class: "form-horizontal", role: "form" }) do |f|
+  - if @info.errors.any?
+    .alert.alert-danger.alert-dismissable[role="alert"]
+      button.close[type="button" data-dismiss="alert"]
+        span[aria-hidden="true"]
+          | ×
+        span.sr-only
+          | Close
+      h4
+        = pluralize(@info.errors.count, "error")
+        |  prohibited this info from being saved:
+      ul
+        - @info.errors.full_messages.each do |msg|
+          li
+            = msg
+  .form-group
+    = f.label :date, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.date_select :date, class: "form-control"
+  .form-group
+    = f.label :title, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :title, class: "form-control"
+  .form-group
+    = f.label :note, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_area :note, class: "form-control" ,:rows => 10
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit class: "btn btn-primary"

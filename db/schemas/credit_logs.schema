@@ -1,0 +1,15 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+create_table "credit_logs", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  t.integer "user_id"
+  t.integer "credit_id"
+  t.integer "author_id"
+  t.datetime "created_at", null: false
+  t.datetime "updated_at", null: false
+  t.string "name"
+  t.string "distribution"
+  t.string "url"
+  t.index ["author_id"], name: "index_credit_logs_on_author_id"
+  t.index ["credit_id"], name: "index_credit_logs_on_credit_id"
+  t.index ["user_id"], name: "index_credit_logs_on_user_id"
+end

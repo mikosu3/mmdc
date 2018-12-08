@@ -1,0 +1,60 @@
+.page-header
+  h1
+    | ユーザー情報
+= search_form_for @q , html: { class: "form-horizontal", role: "form"} do |f|
+  .panel.panel-default
+    .panel-heading
+      span.glyphicon.glyphicon-search[aria-hidden="true"]
+      span
+        | 検索条件
+    .panel-body
+      .form-group
+        = f.label :id_eq, 'ID', class: "col-sm-2 control-label"
+        .col-sm-2
+          = f.text_field :id_eq, class: "form-control"
+        = f.label :screen_name_cont, "ツイッター", class: "col-sm-2 control-label"
+        .col-sm-3
+          = f.text_field :screen_name_cont, class: "form-control"
+        .col-sm-2
+          .checkbox
+            label
+              = f.check_box :is_ban_eq,{class: "form-control"} ,checked_value = "true", unchecked_value = ""
+              |  BAN 
+      .form-group
+        .col-sm-4.col-sm-offset-2
+          = f.submit '検索' ,class: "btn btn-primary"
+          a.btn.btn-default[href="#" onclick="clearFormAll();return false"]
+            | リセット
+.table-responsive
+  .text-right
+    - unless @users.total_count == 0
+      = @users.offset_value + 1
+      | 〜
+      = @users.offset_value + @users.length
+      | 件 / 
+    = @users.total_count
+    | 件
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th
+          = sort_link(@q, :id)
+        th
+          = sort_link(@q, :screen_name, 'ツイッター')
+        th
+          = sort_link(@q, :name, '名前')
+        th
+    tbody
+      = content_tag_for(:tr, @users) do |user|
+        td
+          = user.id
+        td
+          - if user.is_ban
+            p.label.label-danger
+              | BAN
+          = link_to  user.screen_name, "https://twitter.com/#{user.screen_name}", target: "_blank"
+        td
+          = link_to user.name, edit_user_path(user)
+        td
+          = link_to 'BAN', user, method: :delete, data: { confirm: 'Are you sure?' }
+  = paginate(@users)

@@ -1,0 +1,25 @@
+= form_for(@emm, html: { class: "form-horizontal", role: "form" ,:multipart => true}) do |f|
+  - if @emm.errors.any?
+    .alert.alert-danger.alert-dismissable[role="alert"]
+      button.close[type="button" data-dismiss="alert"]
+        span[aria-hidden="true"]
+          | ×
+        span.sr-only
+          | 閉じる
+      h4
+        | 入力エラーがあります:
+      ul
+        - @emm.errors.full_messages.each do |msg|
+          li
+            = msg
+  .form-group
+    = f.label :video_name, "動画名", class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :video_name, class: "form-control"
+  .form-group
+    = f.label 'emmファイル', class: "col-sm-2 control-label"
+    .col-sm-10
+      = file_field_tag :file, class: "upload_file", id:"upload_file"
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit class: "btn btn-primary"

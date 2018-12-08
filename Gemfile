@@ -69,17 +69,21 @@ gem 'auto_strip_attributes'
 gem 'jquery-turbolinks'
 
 gem 'record_tag_helper'
+gem 'slim-rails'
 
 #source 'http://rails-assets.org' do
 #  gem 'rails-assets-bootstrap-fileinput', '~> 2.5.0'
 #end
 
-group :development, :test do
-  gem 'rspec-rails'
-end
+gem 'ridgepole'
 
 group :development, :test do
-  # Call 'byebug' anywhere in the code to stop execution and get a debugger console
+  gem 'rspec-rails'
+  gem 'factory_bot_rails'
+  gem 'spring-commands-rspec'
+  gem 'rails-controller-testing'
+  gem 'rubocop-rspec'
+  gem 'capybara'
   gem 'byebug'
 end
 
@@ -91,5 +95,8 @@ group :development do
   gem 'spring'
 
   gem 'listen'
+  gem 'pry-rails'
+
+  gem 'annotate', git: 'git://github.com/ctran/annotate_models.git'
 end
 

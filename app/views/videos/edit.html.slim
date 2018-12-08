@@ -1,0 +1,10 @@
+.page-header
+  = link_to videos_path, class: 'btn btn-default' do
+    span.glyphicon.glyphicon-list-alt
+    |  Back 
+  = link_to @video, class: 'btn btn-primary' do
+    span.glyphicon.glyphicon-info-sign
+    |  Show 
+  h1
+    | Editing video
+= render 'form'

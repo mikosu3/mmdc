@@ -1,0 +1,15 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+create_table "users", id: :integer, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci" do |t|
+  t.boolean "is_admin", default: false, null: false
+  t.string "screen_name", null: false
+  t.integer "lock_version"
+  t.datetime "created_at", null: false
+  t.datetime "updated_at", null: false
+  t.string "uid", null: false
+  t.string "provider", null: false
+  t.string "name"
+  t.boolean "is_ban", default: false, null: false
+  t.string "auto_login_token"
+  t.index ["provider", "uid"], name: "index_users_on_provider_and_uid", unique: true
+end

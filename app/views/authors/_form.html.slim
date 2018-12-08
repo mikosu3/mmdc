@@ -1,0 +1,55 @@
+= form_for(@author, html: { class: "form-horizontal", role: "form" }) do |f|
+  - if @author.errors.any?
+    .alert.alert-danger.alert-dismissable[role="alert"]
+      button.close[type="button" data-dismiss="alert"]
+        span[aria-hidden="true"]
+          | ×
+        span.sr-only
+          | 閉じる
+      h4
+        | 入力エラーがあります:
+      ul
+        - @author.errors.full_messages.each do |msg|
+          li
+            = msg
+  .form-group
+    = f.label '名前', class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :name, class: "form-control", :maxlength => 100, :placeholder => "作者名"
+  .form-group
+    = f.label :disp_name, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :disp_name, class: "form-control", :maxlength => 200, :placeholder => "作者名と表記を変えたい場合は入力してください"
+  .form-group
+    = f.label :url, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :url, class: "form-control", :maxlength => 250, :placeholder => "作者のサイトがある場合入力してください"
+  .form-group
+    = f.label :nico, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :nico, class: "form-control", :maxlength => 50, :placeholder => "数字IDのみで入力してください"
+  .form-group
+    = f.label :twitter, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :twitter, class: "form-control" , :maxlength => 30, :placeholder => "@なしで入力してください"
+  .form-group
+    = f.label :pixiv, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :pixiv, class: "form-control" , :maxlength => 30, :placeholder => "数字IDのみで入力してください"
+  .form-group
+    = f.label :email, class: "col-sm-2 control-label"
+    .col-sm-10
+      = f.text_field :email, class: "form-control" , :maxlength => 200, :placeholder => "公開して良いメールアドレスを入力してください"
+  - unless  @author.updated_at.nil? then
+    .form-group
+      = f.label :updated_screen_name, class: "col-sm-2 control-label"
+      .col-sm-10
+        #updated_screen_name
+          a href="https://twitter.com/#{@author.updated_screen_name}"
+            img.image src="https://furyutei.work/gadget/twicon/#{@author.updated_screen_name}" /
+          br
+          span.small= @author.updated_at.strftime('%Y年%m月%d日 %H:%M:%S')
+
+  .form-group
+    .col-sm-offset-2.col-sm-10
+      = f.submit class: "btn btn-primary"

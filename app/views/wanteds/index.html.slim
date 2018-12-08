@@ -1,0 +1,55 @@
+.page-header
+  h1
+    | Wanted! 
+    small
+      | 情報提供を求めるモデル情報です
+= search_form_for @q , html: { class: "form-horizontal", role: "form"} do |f|
+  .panel.panel-default
+    .panel-heading
+      span.glyphicon.glyphicon-search[aria-hidden="true"]
+      span
+        | 検索条件
+    .panel-body
+      .form-group
+        = f.label :folder_name_cont, "フォルダ名", class: "col-sm-2 control-label"
+        .col-sm-3
+          = f.text_field :folder_name_cont, class: "form-control"
+        = f.label :file_name_cont, 'ファイル名', class: "col-sm-2 control-label"
+        .col-sm-3
+          = f.text_field :file_name_cont, class: "form-control"
+      .form-group
+        = f.label :extension_eq, "拡張子", class: "col-sm-2 control-label"
+        .col-sm-2
+          = f.text_field :extension_eq, class: "form-control"
+      .form-group
+        .col-sm-4.col-sm-offset-2
+          = f.submit '検索' ,class: "btn btn-primary"
+          a.btn.btn-default[href="#" onclick="clearFormAll();return false"]
+            | リセット
+.table-responsive
+  .text-right
+    - unless @wanteds.total_count == 0
+      = @wanteds.offset_value + 1
+      | 〜
+      = @wanteds.offset_value + @wanteds.length
+      | 件 / 
+    = @wanteds.total_count
+    | 件
+  table.table.table-striped.table-bordered.table-hover
+    thead
+      tr
+        th
+          = sort_link(@q, :folder_name, 'フォルダ名')
+        th
+          = sort_link(@q, :file_name, 'ファイル名')
+        th
+          = sort_link(@q, :extension, '拡張子')
+    tbody
+      = content_tag_for(:tr, @wanteds) do |wanted|
+        td
+          = wanted.folder_name
+        td
+          = link_to wanted.file_name, "credits/new/" + wanted.id.to_s
+        td
+          = wanted.extension
+= paginate(@wanteds)

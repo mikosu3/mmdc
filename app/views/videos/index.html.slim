@@ -1,0 +1,54 @@
+.page-header
+  = link_to new_video_path, class: 'btn btn-primary' do
+    span.glyphicon.glyphicon-plus
+    |  アップロード 
+  h1
+    | 動画情報
+= form_tag(destroy_all_videos_path, method: 'delete') do
+  = button_tag :type => "submit", :class =>"btn btn-danger btn-s-md" do
+    i.glyphicon.glyphicon-trash
+    |  削除 
+  .table-responsive
+    .text-right
+      - unless @videos.total_count == 0
+        = @videos.offset_value + 1
+        | 〜
+        = @videos.offset_value + @videos.length
+        | 件 / 
+      = @videos.total_count
+      | 件
+    table.table.table-striped.table-bordered.table-hover
+      thead
+        tr
+          th[width="10"]
+            = check_box_tag 'check_all'
+          th
+            | 動画名
+          th
+            | 総数
+          th
+            | 解決
+          th
+            | Wanted
+          th
+            | 未解決
+          th[width="100"]
+      tbody
+        = content_tag_for(:tr, @videos) do |video|
+          td
+            = check_box_tag 'ids[]', video.id
+          td
+            = link_to video.name, video_emms_path(video)
+          td.text-right
+            = video.total
+          td.text-right
+            = video.resolveds
+          td.text-right
+            = video.wants
+          td.text-right
+            = video.yets
+          td
+            = link_to  zip_video_path(video), class: "btn btn-default btn-sm" do
+              i.glyphicon.glyphicon-download-alt
+              |  ダウンロード
+= paginate(@videos)
