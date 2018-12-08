@@ -1,3 +1,15 @@
-# Place all the behaviors and hooks related to the matching controller here.
-# All this logic will automatically be available in application.js.
-# You can use CoffeeScript in this file: http://coffeescript.org/
+$(document).ready ->
+  $('#upload_file').fileinput
+    showPreview: false
+    showUpload: false
+    maxFileCount: 1
+    browseClass: 'btn btn-primary fileinput-browse-button'
+    browseIcon: ''
+    browseLabel: ' ファイル選択'
+    removeClass: 'btn btn-warning'
+    removeIcon: ''
+    removeLabel: ' キャンセル'
+    allowedFileExtensions: [ 'emm' ]
+    msgInvalidFileExtension: '拡張子が「emm」のファイルのみ有効です。'
+    msgValidationError: '<span class = "text-danger"> Emmファイルのみ有効です。 </span>'
+  return
