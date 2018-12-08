@@ -291,6 +291,8 @@ class Video < ActiveRecord::Base
                 model_name
                 ,disp_name
                 ,distribution
+                ,extension
+                ,status
             ORDER BY
                 extension ASC
                 ,model_name ASC;

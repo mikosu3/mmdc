@@ -90,8 +90,7 @@ class VideosController < ApplicationController
   # zipファイルDL
   def zip
     dl_file = Video.create_dl_zip(@video.id)
-    stat = File::stat(dl_file)
-    send_file(dl_file, :filename => ERB::Util.url_encode(@video.name)+ '_' + Time.now.strftime('%Y%m%d%H%M%S') + '.zip', :length => stat.size)
+    send_file(dl_file, type: 'application/zip', :filename => ERB::Util.url_encode(@video.name)+ '_' + Time.now.strftime('%Y%m%d%H%M%S') + '.zip')
   end
 
   private
