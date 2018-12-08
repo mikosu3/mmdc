@@ -48,7 +48,7 @@
           td.text-right
             = video.yets
           td
-            = link_to  zip_video_path(video), class: "btn btn-default btn-sm" do
+            = link_to  zip_video_path(video), class: "btn btn-default btn-sm", data: { turbolinks: false } do
               i.glyphicon.glyphicon-download-alt
               |  ダウンロード
 = paginate(@videos)
