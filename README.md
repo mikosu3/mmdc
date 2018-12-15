@@ -1,18 +1,18 @@
-# MMD�N���W�b�g  
-MikuMikuDance�ŗ��p�������f����A�N�Z�T�������܂Ƃ߂�T�[�r�X�ł��B  
-<http://mmdc.tiger-star.net/>�ɂĉ^�p���B
+# MMDクレジット  
+MikuMikuDanceで利用したモデルやアクセサリ情報をまとめるサービスです。  
+<http://mmdc.tiger-star.net/>にて運用中。
 
-## ��
-* Ruby 2.2
-* Ruby on Rails 4.2
+## 環境
+* Ruby 2.5
+* Ruby on Rails 5.1
 * MySQL 5.5
 
-## �@�\
-* MikuMikuEffect���ۑ�����emm�t�@�C�����烂�f���A�A�N�Z�������o����DB�֕ۑ�����
-* ���f���A�A�N�Z�̍�ҁA�z�z��������[�U�[���o�^����
-* ����͈͂ō�ҁA�z�z����𖄂߂��g�p���f���ꗗ�\���_�E�����[�h�ł���悤�ɂ���
+## 機能
+* MikuMikuEffectが保存したemmファイルからモデル、アクセ情報を取り出してDBへ保存する
+* モデル、アクセの作者、配布先情報をユーザーが登録する
+* 解る範囲で作者、配布先情報を埋めた使用モデル一覧表をダウンロードできるようにする
 
-## ���O�t�@�C��
-* ���L�ݒ�t�@�C���̓R�~�b�g����Ă��܂���B�e�X�ł��p�ӂ��������B
+## 除外ファイル
+* 下記設定ファイルはコミットされていません。各々でご用意ください。
     * config/database.yml
     * config/secrets.yml
